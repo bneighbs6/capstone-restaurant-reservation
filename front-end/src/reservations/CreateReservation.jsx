@@ -8,6 +8,11 @@ function CreateReservation() {
       history.goBack();
     }
 
+    function submitHandler() {
+        history.push("/dashboard");
+        console.log("Reservation created successfully.")
+    }
+
     return (
         <form>
             <div className="form-group">
@@ -58,7 +63,7 @@ function CreateReservation() {
                 <label for="reservationTime">Reservation Time</label>
                 <input 
                 name="reservation_time" 
-                type="text" 
+                type="time" 
                 className="form-control" 
                 require="true"
                 id="reservationTime" 
@@ -77,7 +82,7 @@ function CreateReservation() {
                 />
             </div>
             <div className="buttons">
-                <button className="btn btn-success">Submit</button> 
+                <button className="btn btn-success" onClick={submitHandler}>Submit</button> 
                 <button className="btn btn-danger" onClick={cancelHandler}>Cancel</button>
             </div>
         </form>
