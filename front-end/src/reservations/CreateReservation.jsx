@@ -5,7 +5,7 @@ function CreateReservation() {
     const history = useHistory();
 
     function cancelHandler() {
-        history.goBack();
+      history.goBack();
     }
 
     return (
@@ -78,7 +78,7 @@ function CreateReservation() {
             </div>
             <div className="buttons">
                 <button className="btn btn-success">Submit</button> 
-                <button className="btn btn-danger" onSubmit={cancelHandler}>Cancel</button>
+                <button className="btn btn-danger" onClick={cancelHandler}>Cancel</button>
             </div>
         </form>
     )
