@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-function CreateReservation() {
+function ReservationForm() {
     const history = useHistory();
 
     function cancelHandler() {
@@ -14,7 +14,10 @@ function CreateReservation() {
     }
 
     return (
+        <>
+        <h1>Welcome to Periodic Tables</h1>
         <form>
+            <h3>Please Enter Reservation Information</h3>
             <div className="form-group">
                 <label for="firstName">First Name</label>
                 <input 
@@ -85,8 +88,9 @@ function CreateReservation() {
                 <button className="btn btn-success" onClick={submitHandler}>Submit</button> 
                 <button className="btn btn-danger" onClick={cancelHandler}>Cancel</button>
             </div>
-        </form>
+        </form>        
+        </>
     )
 }
 
-export default CreateReservation;
+export default <ReservationForm></ReservationForm>;
