@@ -5,7 +5,7 @@ function ReservationForm() {
     const history = useHistory();
 
     function cancelHandler() {
-      history.goBack();
+      history.goBack(); 
     }
 
     function submitHandler() {
@@ -19,7 +19,7 @@ function ReservationForm() {
         <form>
             <h3>Please Enter Reservation Information</h3>
             <div className="form-group">
-                <label for="firstName">First Name</label>
+                <label htmlFor="firstName">First Name</label>
                 <input 
                 name="first_name" 
                 type="text" 
@@ -30,7 +30,7 @@ function ReservationForm() {
                 />
             </div>
             <div className="form-group">
-                <label for="lastName">Last Name</label>
+                <label htmlFor="lastName">Last Name</label>
                 <input
                 name="last_name"
                 type="text" 
@@ -41,7 +41,7 @@ function ReservationForm() {
                 />
             </div>
             <div className="form-group">
-                <label for="mobileNumber">Mobile Phone Number</label>
+                <label htmlFor="mobileNumber">Mobile Phone Number</label>
                 <input 
                 name="mobile_phone" 
                 type="tel" 
@@ -52,7 +52,7 @@ function ReservationForm() {
                 />
             </div>
             <div className="form-group">
-                <label for="reservationDate">Reservation Date</label>
+                <label htmlFor="reservationDate">Reservation Date</label>
                 <input 
                 name="reservation_date" 
                 type="date" 
@@ -63,7 +63,7 @@ function ReservationForm() {
                 />
             </div>
             <div className="form-group">
-                <label for="reservationTime">Reservation Time</label>
+                <label htmlFor="reservationTime">Reservation Time</label>
                 <input 
                 name="reservation_time" 
                 type="time" 
@@ -74,7 +74,7 @@ function ReservationForm() {
                 />
             </div>
             <div className="form-group">
-                <label for="people">Number in Party</label>
+                <label htmlFor="people">Number in Party</label>
                 <input 
                 name="people" 
                 type="number" 
@@ -93,4 +93,4 @@ function ReservationForm() {
     )
 }
 
-export default <ReservationForm></ReservationForm>;
+export default ReservationForm;

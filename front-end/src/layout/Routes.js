@@ -17,16 +17,16 @@ function Routes() {
   return (
     <Switch>
       <Route exact={true} path="/">
-        <Redirect to={"/dashboard"} />
+        <Redirect to={{ pathname: "/dashboard", search: `?date=${today()}` }} />
+      </Route>
+      <Route path="/dashboard">
+        <Dashboard date={today()} />
       </Route>
       <Route exact={true} path="/reservations">
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/reservations/new">
         <ReservationForm />
-      </Route>
-      <Route path="/dashboard">
-        <Dashboard date={today()} />
       </Route>
       <Route>
         <NotFound />
