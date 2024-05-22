@@ -1,5 +1,9 @@
 const service = require("./reservations.service");
-const asyncErrorBoundary = require("../errors/")
+const asyncErrorBoundary = require("../errors/");
+
+// TODO: Validation middleware for create handler
+
+// TODO: Create the create handler
 
 /**
  * List handler for reservation resources
