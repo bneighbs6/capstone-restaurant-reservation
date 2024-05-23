@@ -14,17 +14,23 @@ function ReservationForm() {
       people: ""
     })
 
+    // Go back to previous page if cancel is clicked
     function cancelHandler() {
-      history.goBack(); // Go back to previous page if cancel is clicked
+      history.goBack();
     }
 
+    // Handles changes to the form
     function changeHandler() {
       // TODO: This change handler will handle the changes of any item in the form 
     }
 
+    // Submits and saves form 
     function submitHandler(event) {
         event.preventDefault(); 
         // TODO: Add submit functionality
+        // Needs to save reservation info to backend
+        // Then push history to dashboard page for date of new reservation
+        // Send back any errors
     }
 
     return (
