@@ -4,15 +4,17 @@ import { useHistory } from "react-router-dom";
 function ReservationForm() {
     const history = useHistory();
 
-    // Setting reservation in a state of empty fields
-    const [reservation, setReservation] = useState({
+    const initialFormState = {
       first_name: "",
       last_name: "",
       mobile_number: "",
       reservation_date: "",
       reservation_time: "",
       people: ""
-    })
+    }
+
+    // Setting reservation in a state of empty fields
+    const [reservation, setReservation] = useState(...initialFormState);
 
     // Go back to previous page if cancel is clicked
     function cancelHandler() {
