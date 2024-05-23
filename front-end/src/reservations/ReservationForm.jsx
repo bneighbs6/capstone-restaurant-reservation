@@ -57,6 +57,7 @@ function ReservationForm() {
               require="true"
               id="firstName"
               onChange={changeHandler}
+              value={reservation.first_name}
               placeholder="Enter First Name"
             />
           </div>
@@ -69,6 +70,7 @@ function ReservationForm() {
               require="true"
               id="lastName"
               onChange={changeHandler}
+              value={reservation.last}
               placeholder="Enter Last Name"
             />
           </div>
@@ -81,6 +83,7 @@ function ReservationForm() {
               require="true"
               id="mobile_number"
               onChange={changeHandler}
+              value={reservation.mobile_number}
               placeholder="Enter Phone Number"
             />
           </div>
@@ -93,6 +96,7 @@ function ReservationForm() {
               require="true"
               id="reservation_date"
               onChange={changeHandler}
+              value={reservation.reservation_date}
               placeholder="Pick a Reservation Date"
             />
           </div>
@@ -105,6 +109,7 @@ function ReservationForm() {
               require="true"
               id="reservation_time"
               onChange={changeHandler}
+              value={reservation.reservation_time}
               placeholder="Pick a Time"
             />
           </div>
@@ -117,6 +122,7 @@ function ReservationForm() {
               require="true"
               id="people"
               onChange={changeHandler}
+              value={reservation.people}
               placeholder="Amount of People"
             />
           </div>
