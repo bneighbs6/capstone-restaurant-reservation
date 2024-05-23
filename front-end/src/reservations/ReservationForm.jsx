@@ -14,7 +14,7 @@ function ReservationForm() {
     }
 
     // Setting reservation in a state of empty fields
-    const [reservation, setReservation] = useState(...initialFormState);
+    const [reservation, setReservation] = useState({...initialFormState});
 
     // Go back to previous page if cancel is clicked
     function cancelHandler() {
@@ -22,9 +22,14 @@ function ReservationForm() {
     }
 
     // Handles changes to the form
-    function changeHandler() {
+    function changeHandler({ target }) {
       // TODO: This change handler will handle the changes of any item in the form 
-    }
+      const value = target.value; 
+      setReservation({
+        ...reservation,
+        [target.name]: value,
+      });
+    };
 
     // Submits and saves form 
     function submitHandler(event) {
@@ -33,7 +38,10 @@ function ReservationForm() {
         // Needs to save reservation info to backend
         // Then push history to dashboard page for date of new reservation
         // Send back any errors
+        setReservation({...initialFormState}); // Reset reservation
     }
+
+    console.log("Current value of reservation is:", reservation);
 
     return (
       <>
@@ -48,6 +56,7 @@ function ReservationForm() {
               className="form-control"
               require="true"
               id="firstName"
+              onChange={changeHandler}
               placeholder="Enter First Name"
             />
           </div>
@@ -59,39 +68,43 @@ function ReservationForm() {
               className="form-control"
               require="true"
               id="lastName"
+              onChange={changeHandler}
               placeholder="Enter Last Name"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="mobileNumber">Mobile Phone Number</label>
+            <label htmlFor="mobile_number">Mobile Phone Number</label>
             <input
-              name="mobile_phone"
+              name="mobile_number"
               type="tel"
               className="form-control"
               require="true"
-              id="mobileNumber"
+              id="mobile_number"
+              onChange={changeHandler}
               placeholder="Enter Phone Number"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="reservationDate">Reservation Date</label>
+            <label htmlFor="reservation_date">Reservation Date</label>
             <input
               name="reservation_date"
               type="date"
               className="form-control"
               require="true"
-              id="reservationDate"
+              id="reservation_date"
+              onChange={changeHandler}
               placeholder="Pick a Reservation Date"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="reservationTime">Reservation Time</label>
+            <label htmlFor="reservation_time">Reservation Time</label>
             <input
               name="reservation_time"
               type="time"
               className="form-control"
               require="true"
-              id="reservationTime"
+              id="reservation_time"
+              onChange={changeHandler}
               placeholder="Pick a Time"
             />
           </div>
@@ -103,6 +116,7 @@ function ReservationForm() {
               className="form-control"
               require="true"
               id="people"
+              onChange={changeHandler}
               placeholder="Amount of People"
             />
           </div>
