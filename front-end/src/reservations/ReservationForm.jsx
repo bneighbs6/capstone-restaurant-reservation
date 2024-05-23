@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 function ReservationForm() {
     const history = useHistory();
 
+    // Setting reservation in a state of empty fields
+    const [reservation, setReservation] = useState({
+      first_name: "",
+      last_name: "",
+      mobile_number: "",
+      reservation_date: "",
+      reservation_time: "",
+      people: ""
+    })
+
     function cancelHandler() {
-      history.goBack(); 
+      history.goBack(); // Go back to previous page if cancel is clicked
     }
 
-    function submitHandler() {
-        history.push("/dashboard");
-        console.log("Reservation created successfully.")
+    function changeHandler() {
+      // TODO: This change handler will handle the changes of any item in the form 
+    }
+
+    function submitHandler(event) {
+        event.preventDefault(); 
+        // TODO: Add submit functionality
     }
 
     return (

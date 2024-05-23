@@ -67,3 +67,7 @@ export async function listReservations(params, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+
+export async function createReservation() {
+  // TODO: Send a POST method to the API with reservation info
+}
