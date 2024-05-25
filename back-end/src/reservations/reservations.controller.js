@@ -3,6 +3,13 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 // TODO: Validation middleware for create handler
 
+function hasData(req, res, next) {
+  if (req.body.data) {
+    return next(); 
+  }
+  next({ status: 400, message: "Request body must have data property."})
+}
+
 // TODO: Create the create handler
 async function create(req, res) {
   const newReservation = {
