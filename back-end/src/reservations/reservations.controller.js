@@ -54,7 +54,9 @@ function hasMobileNumber(req, res, next) {
 // TODO: Need to validate that reservation date is a date
 function hasReservationDate(req, res, next) {
   const { data: { reservation_date } = {} } = req.body;
-  if (reservation_date) {
+  const regex = new RegExp(/\d{4}-\d{2}-\d{2}/);
+
+  if (reservation_date && regex.test(reservation_date)) {
     return next(); 
   }
   next({
@@ -64,10 +66,10 @@ function hasReservationDate(req, res, next) {
   return next(); 
 }
 
-// TODO: Need to validate time is a time
 function hasReservationTime(req, res, next) {
   const { data: { reservation_time } = {} } = req.body; 
-  if (reservation_time) {
+  const regex = new RegExp(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/);
+  if (reservation_time && regex.test(reservation_time)) {
     return next(); 
   }
   next({
@@ -86,7 +88,7 @@ function hasPeople(req, res, next) {
   }
    next({
     status: 400,
-    message: "Reservation must indicate the number of people in a party, ranging from 1 to 6.",
+    message: "Reservation must include the number of people. Can be from 1-6.",
    });
   return next();
 }
