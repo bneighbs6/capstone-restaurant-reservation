@@ -87,7 +87,6 @@ function hasPeople(req, res, next) {
   return next(); 
 }
 
-// TODO: Create the create handler
 async function create(req, res) {
   const newReservation = {
     ...req.body.data,
