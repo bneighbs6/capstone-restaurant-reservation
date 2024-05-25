@@ -22,7 +22,7 @@ function hasFirstName(req, res, next) {
   }
   next({
     status: 400,
-    message: "Reservation must include a first name."
+    message: "Reservation must include a first_name."
   });
   return next(); 
 }
@@ -34,19 +34,19 @@ function hasLastName(req, res, next) {
   }
   next({
     status: 400,
-    message: "Reservation must include a last name."
+    message: "Reservation must include a last_name."
   });
   return next(); 
 }
 
-function hasMobileNumber(req, res, nexxt) {
+function hasMobileNumber(req, res, next) {
   const { data: { mobile_number } = {} } = req.body; 
   if (mobile_number) {
     return next();
   }
   next({
     status: 400,
-    message: "Reservation must include a mobile number."
+    message: "Reservation must include a mobile_number."
   });
   return next();
 }
@@ -58,7 +58,7 @@ function hasReservationDate(req, res, next) {
   }
   next({
     status: 400, 
-    message: "Reservation must include a reservation date."
+    message: "Reservation must include a reservation_date."
   });
   return next(); 
 }
@@ -70,7 +70,7 @@ function hasReservationTime(req, res, next) {
   }
   next({
     status: 400, 
-    message: "Reservation must include a reservation time."
+    message: "Reservation must include a reservation_time."
   });
   return next(); 
 }
