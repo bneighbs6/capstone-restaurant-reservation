@@ -94,9 +94,7 @@ function hasPeople(req, res, next) {
 }
 
 async function create(req, res) {
-  const newReservation = {
-    ...req.body.data,
-  }
+  const newReservation = { ...req.body.data }
   const createdReservation = await service.create(newReservation);
   res.status(201).json({ data: createdReservation })
 }
@@ -105,9 +103,11 @@ async function create(req, res) {
  * List handler for reservation resources
  */
 async function list(req, res) {
-  res.json({
-    data: [],
-  });
+  const date = req.query.date; 
+  if (date) {
+    const data = await service.listReservationByDate(date);
+    res.json({ data });
+  } 
 }
 
 module.exports = {
@@ -119,6 +119,7 @@ module.exports = {
     hasReservationDate,
     hasReservationTime,
     hasPeople, 
-    asyncErrorBoundary(create)],
+    asyncErrorBoundary(create)
+  ],
   list,
 };
