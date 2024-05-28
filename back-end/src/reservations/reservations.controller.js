@@ -103,11 +103,11 @@ async function create(req, res) {
  * List handler for reservation resources
  */
 async function list(req, res) {
-  const date = req.query.date; 
+  const { date } = req.query;
   if (date) {
-    const data = await service.listReservationByDate(date);
+    const data = await service.listReservationsByDate(date);
     res.json({ data });
-  } 
+  }
 }
 
 module.exports = {
@@ -121,5 +121,5 @@ module.exports = {
     hasPeople, 
     asyncErrorBoundary(create)
   ],
-  list,
+  list: asyncErrorBoundary(list),
 };

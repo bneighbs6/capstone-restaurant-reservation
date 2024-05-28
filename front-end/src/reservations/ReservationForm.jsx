@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { createReservation } from "../utils/createReservation"
 
 function ReservationForm() {
     const history = useHistory();
@@ -13,8 +14,11 @@ function ReservationForm() {
       people: ""
     }
 
+    // Setting our error to null 
+    const [error, setError] = useState(null);
+
     // Setting reservation in a state of empty fields
-    const [reservation, setReservation] = useState({...initialFormState});
+    const [reservation, setReservation] = useState({...initialFormState}); 
 
     // Go back to previous page if cancel is clicked
     function cancelHandler() {
@@ -32,13 +36,17 @@ function ReservationForm() {
     };
 
     // Submits and saves form 
-    function submitHandler(event) {
-        event.preventDefault(); 
-        // TODO: Add submit functionality
-        // Needs to save reservation info to backend
-        // Then push history to dashboard page for date of new reservation
-        // Send back any errors
-        setReservation({...initialFormState}); // Reset reservation
+    // TODO: LOOK AT FLASHCARD APP CreateDeck() component as an example for this
+    function submitHandler(e) {
+        e.preventDefault(); 
+        const abortController = new AbortController();
+        setError(null);
+        createReservation(reservation, abortController.signal)
+        .then(() => 
+          history.push(`/dashboard?date=${reservation.reservation_date}`)
+        )
+        .catch(setError);
+        return () => abortController.abort(); 
     }
 
     console.log("Current value of reservation is:", reservation);
