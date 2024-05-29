@@ -4,6 +4,7 @@ const P = require("pino");
 
 // TODO: Validation middleware for create handler
 
+// Verifies that reservation has data inputted
 function hasData(req, res, next) {
   if (req.body.data) {
     return next(); 
@@ -15,6 +16,7 @@ function hasData(req, res, next) {
   return next(); 
 }
 
+// Verifies reservation has a first name
 function hasFirstName(req, res, next) {
   const { data: { first_name } = {} } = req.body; 
   if (first_name) {
@@ -27,6 +29,7 @@ function hasFirstName(req, res, next) {
   return next(); 
 }
 
+// Verifies reservation has a last name 
 function hasLastName(req, res, next) {
   const { data: { last_name } = {} } = req.body; 
   if (last_name) {
@@ -39,6 +42,7 @@ function hasLastName(req, res, next) {
   return next(); 
 }
 
+// Verifies reservation has proper mobile number
 function hasMobileNumber(req, res, next) {
   const { data: { mobile_number } = {} } = req.body; 
   if (mobile_number) {
@@ -51,7 +55,7 @@ function hasMobileNumber(req, res, next) {
   return next();
 }
 
-// TODO: Need to validate that reservation date is a date
+// Verifies reservation has a proper date
 function hasReservationDate(req, res, next) {
   const { data: { reservation_date } = {} } = req.body;
   const regex = new RegExp(/\d{4}-\d{2}-\d{2}/);
@@ -66,6 +70,7 @@ function hasReservationDate(req, res, next) {
   return next(); 
 }
 
+// Verifies reservation has proper time 
 function hasReservationTime(req, res, next) {
   const { data: { reservation_time } = {} } = req.body; 
   const regex = new RegExp(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/);
@@ -79,6 +84,7 @@ function hasReservationTime(req, res, next) {
   return next(); 
 }
 
+// Verifies reservation has people included
 function hasPeople(req, res, next) {
   const people = req.body.data.people;
   const regex = new RegExp(/[^1-6]/);
@@ -93,6 +99,9 @@ function hasPeople(req, res, next) {
   return next();
 }
 
+/**
+ * Create handler for reservations
+ */
 async function create(req, res) {
   const newReservation = { ...req.body.data }
   const createdReservation = await service.create(newReservation);

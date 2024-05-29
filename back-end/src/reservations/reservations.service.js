@@ -1,5 +1,6 @@
 const knex = require("../db/connection");
 
+// Creates a new reservation
 function create(newReservation) {
     return knex("reservations")
     .insert(newReservation)
@@ -7,6 +8,7 @@ function create(newReservation) {
     .then((createdRecord) => createdRecord[0]);
 }
 
+// Lists reservations by date and orders by time
 function listReservationsByDate(reservation_date) {
     return knex("reservations")
       .select("*")
