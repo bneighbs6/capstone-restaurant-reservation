@@ -46,10 +46,11 @@ function ReservationForm() {
           history.push(`/dashboard?date=${reservation.reservation_date}`)
         )
         .catch(setError);
+        // console.log(reservation);
         return () => abortController.abort(); 
     }
 
-    console.log(reservation);
+    // console.log(reservation);
 
     return (
       <>
@@ -135,7 +136,7 @@ function ReservationForm() {
             />
           </div>
           <div className="buttons">
-            <button type="submit" className="btn btn-success">
+            <button type="submit" onClick={submitHandler} className="btn btn-success">
               Submit
             </button>
             <button className="btn btn-danger" onClick={cancelHandler}>
