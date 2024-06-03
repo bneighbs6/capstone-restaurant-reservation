@@ -49,7 +49,7 @@ function ReservationForm() {
         return () => abortController.abort(); 
     }
 
-    console.log("Current value of reservation is:", reservation);
+    console.log(reservation);
 
     return (
       <>
@@ -57,28 +57,28 @@ function ReservationForm() {
         <form onSubmit={submitHandler}>
           <h3>Please Enter Reservation Information</h3>
           <div className="form-group">
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="first_name">First Name</label>
             <input
               name="first_name"
               type="text"
               className="form-control"
               require="true"
-              id="firstName"
+              id="first_name"
               onChange={changeHandler}
               value={reservation.first_name}
               placeholder="Enter First Name"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="lastName">Last Name</label>
+            <label htmlFor="last_name">Last Name</label>
             <input
               name="last_name"
               type="text"
               className="form-control"
               require="true"
-              id="lastName"
+              id="last_name"
               onChange={changeHandler}
-              value={reservation.last}
+              value={reservation.last_name}
               placeholder="Enter Last Name"
             />
           </div>
