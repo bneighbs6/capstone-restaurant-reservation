@@ -126,7 +126,7 @@ function ReservationForm() {
             <label htmlFor="people">Number in Party</label>
             <input
               name="people"
-              type="number"
+              type="text"
               className="form-control"
               require="true"
               id="people"
