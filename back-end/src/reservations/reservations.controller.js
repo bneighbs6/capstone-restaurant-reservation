@@ -85,20 +85,24 @@ function hasReservationTime(req, res, next) {
 }
 
 // Verifies reservation has people included
+// TODO: The typeof people === number conditional statement is failing. Figure out why
 function hasPeople(req, res, next) {
   const people = req.body.data.people;
   const regex = new RegExp(/[^1-6]/);
+
+  // if (typeof people === "string") {
+  //   people = Number(people);
+  // }  
+
   console.log("first-> ", people)
   console.log("second-> ", !regex.test(people))
   console.log("third->", typeof people === "number") 
   console.log(typeof people);
+
   // if people is truthy, people is a number b/w 1-6, and typeof = number
-  if (people && !regex.test(people)) {
+  if (people && !regex.test(people) && typeof people === "number") {
     return next();
-  } else if (typeof people === "string") {
-    people = parseInt(people, 10);
-    }  
-     else {
+  } else {
     next({
       status: 400,
       message: "Reservation must include the number of people. Can be from 1-6.",
