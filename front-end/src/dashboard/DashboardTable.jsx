@@ -5,7 +5,6 @@ function DashboardTable({ reservations, loadReservations }) {
       return (
         <tr key={reservation.reservation_id}>
           <th>Reservation ID</th>
-          <td>{reservation.reservation_id}</td>
           <td>{reservation.first_name}</td>
           <td>{reservation.last_name}</td>
           <td>{reservation.mobile_number}</td>
@@ -15,10 +14,9 @@ function DashboardTable({ reservations, loadReservations }) {
     });
   
     return (
-      <table>
+      <table className="col-md-6 col-lg-6">
         <thead>
           <tr>
-            <th>Reservation ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Mobile Number</th>
