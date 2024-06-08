@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createReservation } from "../utils/api";
 import { formatAsDate } from "../utils/date-time";
+import ErrorAlert from "../layout/ErrorAlert";
 
 function ReservationForm() {
     const history = useHistory();
@@ -58,6 +59,7 @@ function ReservationForm() {
     return (
       <>
         <h1>Welcome to Periodic Tables</h1>
+        <ErrorAlert error={error} />
         <form onSubmit={submitHandler}>
           <h3>Please Enter Reservation Information</h3>
           <div className="form-group">
