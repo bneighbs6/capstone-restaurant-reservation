@@ -124,8 +124,24 @@ function hasReservationTime(req, res, next) {
   return next(); 
 }
 
+function hasReservationTimeInAcceptableTimes(req, res, next) {
+  const { data: { reservation_time } = {} } = req.body; 
+
+  const reservationTime = reservation_time.replace(":", "");
+
+  if (reservation_time) {
+    if (Number(reservationTime) < 1030 || Number(reservationTime) > 2130) {
+      next({
+        status: 400,
+        message: "Reservation cannot be before 10:30 a.m. or after 9:30 p.m."
+      });
+      return next();
+    }
+  }
+  return next();
+}
+
 // Verifies reservation has people included
-// TODO: The typeof people === number conditional statement is failing. Figure out why
 function hasPeople(req, res, next) {
   const people = req.body.data.people;
   const regex = new RegExp(/[^1-6]/);
@@ -176,6 +192,7 @@ module.exports = {
     reservationDateNotATuesday,
     reservationDateNotInPast,
     hasReservationTime,
+    hasReservationTimeInAcceptableTimes,
     hasPeople, 
     asyncErrorBoundary(create)
   ],
