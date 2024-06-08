@@ -69,6 +69,46 @@ function hasReservationDate(req, res, next) {
   });
   return next(); 
 }
+// TODO: Create validation functions for reservationNotOnATuesday and reservationNotInThePast
+
+// Verifies that reservation is not on a tuesday
+function reservationDateNotInPast(req, res, next) {
+  const { data: { reservation_date, reservation_time } = {} } = req.body; 
+
+  if (reservation_date) {
+    const currentDateAndTime = Date.now();
+    const reservationDateAndTime = new Date(
+      `${reservation_date} ${reservation_time}`
+    );
+    console.log(reservationDateAndTime);
+
+    if (reservationDateAndTime < currentDateAndTime) {
+      next({
+        status: 400, 
+        message: "Reservations must be made on a future date."
+      });
+    }
+  }
+  return next();
+}
+
+function reservationDateNotATuesday(req, res, next) {
+  // const { reservationDate, errors } = res.locals;
+  const { data: { reservation_date } = {} } = req.body; 
+
+  if (reservation_date) {
+    const weekDay = new Date(reservation_date).getUTCDay();
+
+    if (weekDay === 2) {
+      next({
+        status: 400, 
+        message: "We are closed on Tuesdays."
+      })
+      return next();
+    }
+  }
+  return next();
+}
 
 // Verifies reservation has proper time 
 function hasReservationTime(req, res, next) {
@@ -90,14 +130,10 @@ function hasPeople(req, res, next) {
   const people = req.body.data.people;
   const regex = new RegExp(/[^1-6]/);
 
-  // if (typeof people === "string") {
-  //   people = Number(people);
-  // }  
-
-  console.log("first-> ", people)
-  console.log("second-> ", !regex.test(people))
-  console.log("third->", typeof people === "number") 
-  console.log(typeof people);
+  // console.log("first-> ", people)
+  // console.log("second-> ", !regex.test(people))
+  // console.log("third->", typeof people === "number") 
+  // console.log(typeof people);
 
   // if people is truthy, people is a number b/w 1-6, and typeof = number
   if (people && !regex.test(people) && typeof people === "number") {
@@ -137,6 +173,8 @@ module.exports = {
     hasLastName, 
     hasMobileNumber,
     hasReservationDate,
+    reservationDateNotATuesday,
+    reservationDateNotInPast,
     hasReservationTime,
     hasPeople, 
     asyncErrorBoundary(create)
