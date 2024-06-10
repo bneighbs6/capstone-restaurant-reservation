@@ -2,21 +2,23 @@ const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const P = require("pino");
 
+// TODO: Seed database
+
 function hasData(req, res, next) {
     if (req.body.data) {
-        return next();
+      return next();
     }
-    next({
+    next({ 
         status: 400, 
-        message: "Data missing from table."
-    })
-}
+        message: "Request body must have data property." 
+    });
+  }
 
 async function create(req, res, next) {
-    const newTable = await service.create(req.body.data);
-    res.status(201).json({ data: newTable })
+  const newTable = await service.create(req.body.data);
+  res.status(201).json({ data: newTable });
 }
 
 module.exports = {
-    create: asyncErrorBoundary(create),
-}
+  create: [hasData, asyncErrorBoundary(create)],
+};
