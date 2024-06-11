@@ -3,7 +3,7 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const P = require("pino");
 const { table } = require("../db/connection");
 
-// TODO: Validation Middleware
+// TODO: Validation Middleware for create
 
 // Verifies request body has data
 function hasData(req, res, next) {
