@@ -33,7 +33,7 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
 
-      <Route exact ={true} path="/tables/new">
+      <Route path="/tables/new">
         <TableCreate />
       </Route>
 

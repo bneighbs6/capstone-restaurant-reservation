@@ -8,6 +8,13 @@ function create(newTable) {
     .then((createdTable) => createdTable[0]);
 }
 
+function readTable(table_id) {
+    return knex("tables")
+    .returning("*")
+    .where({ table_id })
+    .first();
+}
+
 module.exports = {
     create,
 }

@@ -2,7 +2,7 @@ const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const P = require("pino");
 
-// TODO: Seed database
+// TODO: Validation Middleware
 
 function hasData(req, res, next) {
     if (req.body.data) {
@@ -17,6 +17,10 @@ function hasData(req, res, next) {
 async function create(req, res, next) {
   const newTable = await service.create(req.body.data);
   res.status(201).json({ data: newTable });
+}
+
+async function list(req, res, next) {
+    res.json({ data: await service.list() });
 }
 
 module.exports = {
