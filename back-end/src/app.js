@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.use("/reservations", reservationsRouter);
-app.use("tables", tablesRouter);
+app.use("/tables", tablesRouter);
 
 app.use(notFound);
 app.use(errorHandler);
