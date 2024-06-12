@@ -30,6 +30,10 @@ function TableCreate() {
     return () => abortController.abort();
   }
 
+  function cancelHandler() {
+    history.goBack();
+  }
+
   return (
     <>
       <h1>Reserved Tables</h1>
@@ -60,8 +64,8 @@ function TableCreate() {
         </div>
 
         <div className="form-group">
-          <button className="btn btn-success">Submit</button>
-          <button className="btn btn-danger">Cancel</button>
+          <button type="submit" className="btn btn-success" onClick={submitHandler}>Submit</button>
+          <button className="btn btn-danger" onClick={cancelHandler}>Cancel</button>
         </div>
 
       </form>
