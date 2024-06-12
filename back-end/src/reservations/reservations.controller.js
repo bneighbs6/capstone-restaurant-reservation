@@ -69,7 +69,6 @@ function hasReservationDate(req, res, next) {
   });
   return next(); 
 }
-// TODO: Create validation functions for reservationNotOnATuesday and reservationNotInThePast
 
 // Verifies that reservation is not on a tuesday
 function reservationDateNotInPast(req, res, next) {
@@ -92,6 +91,7 @@ function reservationDateNotInPast(req, res, next) {
   return next();
 }
 
+// Verifies reservation date is not a Tuesday
 function reservationDateNotATuesday(req, res, next) {
   // const { reservationDate, errors } = res.locals;
   const { data: { reservation_date } = {} } = req.body; 
@@ -124,6 +124,7 @@ function hasReservationTime(req, res, next) {
   return next(); 
 }
 
+// Verifies reservation time is acceptable
 function hasReservationTimeInAcceptableTimes(req, res, next) {
   const { data: { reservation_time } = {} } = req.body; 
 
@@ -163,12 +164,32 @@ function hasPeople(req, res, next) {
 }
 
 /**
+ * VALIDATION MIDDLEWARE FOR READ
+ */
+
+async function reservationIdExists(req, res, next) {
+  const reservation = await service.read(req.params.reservation_id);
+  if (reservation) {
+    res.locals.reservation = reservation;
+    return next();
+  }
+  next({ status: 404, message: "Reservation Id not found."})
+}
+/**
  * Create handler for reservations
  */
 async function create(req, res) {
   const newReservation = { ...req.body.data }
   const createdReservation = await service.create(newReservation);
   res.status(201).json({ data: createdReservation })
+}
+
+/**
+ * Read handler for reservations
+ */
+
+function read(req, res) {
+  res.json({ data: res.locals.reservation })
 }
 
 /**
@@ -196,5 +217,6 @@ module.exports = {
     hasPeople, 
     asyncErrorBoundary(create)
   ],
+  read: [reservationIdExists, asyncErrorBoundary(read)],
   list: asyncErrorBoundary(list),
 };

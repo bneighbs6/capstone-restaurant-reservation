@@ -8,6 +8,13 @@ function create(newReservation) {
     .then((createdRecord) => createdRecord[0]);
 }
 
+function read(reservation_id) {
+    return knex("reservations as r") 
+    .select("*")
+    .where({ reservation_id })
+    .first();
+}
+
 // Lists reservations by date and orders by time
 function listReservationsByDate(reservation_date) {
     return knex("reservations")
@@ -18,5 +25,6 @@ function listReservationsByDate(reservation_date) {
 
 module.exports = {
     create,
+    read,
     listReservationsByDate,
 }
