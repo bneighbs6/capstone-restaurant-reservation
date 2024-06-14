@@ -95,7 +95,22 @@ export async function createTable(table, signal) {
   return await fetchJson(url, options);
 }
 
+// Lists the existing tables
 export async function listTables(signal) {
   const url = `${API_BASE_URL}/tables`;
   return await fetchJson(url, { headers, signal }, [])
-}
+};
+
+// Update Table with Assignment of Reservation
+export async function seatReservation(tableAssignment, signal) {
+  const url = `${API_BASE_URL}/tables/${tableAssignment.table_id}/seat`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({
+      data: { reservation_id: tableAssignment.reservation_id },
+    }),
+    signal,
+  };
+  return await fetchJson(url, options, {});
+};

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom"
 import ErrorAlert from "../../layout/ErrorAlert";
+import { seatReservation, listTables } from "../../utils/api";
 
 
-function SeatReservationForm(reservation_id) {
-    // const { reservation_id } = useParams(); 
+function SeatReservationForm() {
+    const { reservation_id } = useParams(); 
+    const abortController = new AbortController();
     const history = useHistory(); 
     const[error, setError] = useState(null);
     const [tables, setTables] = useState([]);
@@ -12,6 +14,13 @@ function SeatReservationForm(reservation_id) {
         table_id: "",
         reservation_id,
     });
+
+    useEffect(loadDashboard, []);
+
+    function loadDashboard() {
+        listTables(abortController.signal).then(setTables).catch(setError);
+        return () => abortController.abort(); 
+    }
 
     const tableAssignmentOptions = tables.map((table) => {
         <option value={table.table_id} key={table.table_id}>
@@ -26,6 +35,22 @@ function SeatReservationForm(reservation_id) {
         }));
     };
 
+    function submitHandler(e) {
+        e.preventDefault();
+        setError(null);
+
+        if(!tableAssignment.table_id) {
+            setError({
+                message: "Please select a table option from dropdown menu."
+            });
+        } else {
+            seatReservation(tableAssignment, abortController.signal)
+                .then(() => history.push("/"))
+                .catch(setError);
+                return () => abortController.abort(); 
+        }
+    };
+
     function cancelHandler() {
         history.goBack()
     }
@@ -34,7 +59,7 @@ function SeatReservationForm(reservation_id) {
         <>
             <h1>Reserve Seat</h1>
             <ErrorAlert error = {error} />
-            <form>
+            <form onSubmit={submitHandler}>
                 <div className="row">
                     <label htmlFor="table_assignment">
                         <h5>Assign to table</h5>
@@ -59,7 +84,7 @@ function SeatReservationForm(reservation_id) {
                 </div>
             </form>
         </>
-    )
+    );
 }
 
 export default SeatReservationForm;
