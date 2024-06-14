@@ -30,6 +30,8 @@ function TableCreate() {
     return () => abortController.abort();
   }
 
+  // TODO: Need to figure out why the cancel button test is failing
+  // Test is failing because tables still aren't displaying on dashboard
   function cancelHandler() {
     history.goBack();
   }
@@ -38,7 +40,7 @@ function TableCreate() {
     <>
       <h1>Reserved Tables</h1>
       <ErrorAlert error={error} />
-      <form onSubmit={submitHandler} className="">
+      <form onSubmit={submitHandler}>
 
         <div className="form-group">
           <label htmlFor="table_name" className="form-label">Table Name</label>
@@ -63,10 +65,14 @@ function TableCreate() {
           />
         </div>
 
-        <div className="form-group">
-          <button type="submit" className="btn btn-success" onClick={submitHandler}>Submit</button>
-          <button className="btn btn-danger" onClick={cancelHandler}>Cancel</button>
-        </div>
+        <div className="buttons">
+            <button type="submit" onClick={submitHandler} className="btn btn-success">
+              Submit
+            </button>
+            <button className="btn btn-danger" onClick={cancelHandler}>
+              Cancel
+            </button>
+          </div>
 
       </form>
     </>
