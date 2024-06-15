@@ -17,18 +17,19 @@ function SeatReservationForm() {
 
     // Adding abortController to avoid the below error:
     // React Hook useEffect has a missing dependency: 'abortController'
-    useEffect(loadDashboard, [abortController]); 
+    // Made the loadDashboard render every time its called made testing take longer
+    useEffect(loadDashboard, []); 
 
     function loadDashboard() {
         listTables(abortController.signal).then(setTables).catch(setError);
         return () => abortController.abort(); 
     }
 
-    const tableAssignmentOptions = tables.map((table) => {
+    const tableAssignmentOptions = tables.map((table) => (
         <option value={table.table_id} key={table.table_id}>
-            {table.table_name} - {table.capacity}
+          {table.table_name} - {table.capacity}
         </option>
-    });
+      ));
 
     function changeHandler({ target: { name, value } }) {
         setTableAssignment((prevTable) => ({
