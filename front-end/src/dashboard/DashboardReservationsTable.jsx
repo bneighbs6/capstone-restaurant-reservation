@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { formatAsTime } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -6,6 +6,8 @@ import ErrorAlert from "../layout/ErrorAlert";
 
 function DashboardReservationsTable({ reservations, loadReservations }) {
   const location = useLocation(); 
+
+  const [error, setError] = useState(null);
 
     const rows = Array.isArray(reservations) && reservations.map((reservation, index) => {
       if (location.pathname="/dashboard" && (reservation.status === "finished" || reservation.status === "cancelled")) {
@@ -39,6 +41,8 @@ function DashboardReservationsTable({ reservations, loadReservations }) {
     }
   
     return (
+      <>
+      <ErrorAlert error={error} />
       <table className="col-md-6 col-lg-6">
         <thead>
           <tr>
@@ -50,7 +54,8 @@ function DashboardReservationsTable({ reservations, loadReservations }) {
           </tr>
         </thead>
         <tbody>{rows}</tbody>
-      </table>
+      </table>      
+      </>
     );
   }
 
