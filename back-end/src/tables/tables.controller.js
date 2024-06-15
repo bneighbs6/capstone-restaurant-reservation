@@ -52,6 +52,20 @@ function hasCapacity(req, res, next) {
         message: "Request body requires a capacity"
     })
   }
+/** 
+ * VALIDATION MIDDLEWARE FOR PUT /tables/:table_id/seat
+ */ 
+
+function hasReservationId(req, res, next) {
+  const { data: { reservation_id } = {} } = req.body; 
+  if (reservation_id) {
+    return next();
+  }
+  next({
+    status: 400,
+    message: "Request body requires a reservation_id"
+  })
+}
 
 async function create(req, res, next) {
   const newTable = await service.create(req.body.data);
@@ -72,6 +86,6 @@ async function list(req, res, next) {
 
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
-  update: [hasData, asyncErrorBoundary(update)],
+  update: [hasData, hasReservationId, asyncErrorBoundary(update)],
   list: asyncErrorBoundary(list),
 };
