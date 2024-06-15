@@ -67,6 +67,18 @@ function hasReservationId(req, res, next) {
   })
 }
 
+async function reservationIdExists(req, res, next) {
+  const { data: { reservation_id } = {} } = req.body; 
+  const reservation = await service.readReservation(reservation_id);
+  if (reservation) {
+    return next();
+  }
+  next({
+    status: 404,
+    message: `Reservation ID: ${reservation_id} does not exist.`
+  });
+}
+
 async function create(req, res, next) {
   const newTable = await service.create(req.body.data);
   res.status(201).json({ data: newTable });
@@ -86,6 +98,6 @@ async function list(req, res, next) {
 
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
-  update: [hasData, hasReservationId, asyncErrorBoundary(update)],
+  update: [hasData, hasReservationId, reservationIdExists, asyncErrorBoundary(update)],
   list: asyncErrorBoundary(list),
 };
