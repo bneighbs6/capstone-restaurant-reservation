@@ -51,11 +51,19 @@ function hasCapacity(req, res, next) {
         status: 400, 
         message: "Request body requires a capacity"
     })
-}
+  }
 
 async function create(req, res, next) {
   const newTable = await service.create(req.body.data);
   res.status(201).json({ data: newTable });
+}
+
+async function update(req, res, next) {
+  const { table_id } = res.locals.table
+  const { reservation_id } = req.body.data; 
+
+  const data = await service.updateTableAssignment(table_id, reservation_id);
+  res.json({ data });
 }
 
 async function list(req, res, next) {
@@ -64,5 +72,6 @@ async function list(req, res, next) {
 
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
+  update: [hasData, asyncErrorBoundary(update)],
   list: asyncErrorBoundary(list),
 };
