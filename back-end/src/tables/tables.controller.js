@@ -79,6 +79,17 @@ async function reservationIdExists(req, res, next) {
   });
 }
 
+function tableHasCapacity(req, res, next) {
+  const { table, reservation } = res.locals; 
+  if (table && reservation && table.capacity >= reservation.people) {
+    return next();
+  }
+  next({
+    status: 400,
+    message: "This table does not have sufficient capacity for this reservation"
+  })
+}
+
 async function create(req, res, next) {
   const newTable = await service.create(req.body.data);
   res.status(201).json({ data: newTable });
@@ -98,6 +109,6 @@ async function list(req, res, next) {
 
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
-  update: [hasData, hasReservationId, reservationIdExists, asyncErrorBoundary(update)],
+  update: [hasData, hasReservationId, reservationIdExists, tableHasCapacity, asyncErrorBoundary(update)],
   list: asyncErrorBoundary(list),
 };
