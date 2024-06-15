@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { listTables, deleteTableAssignment } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function DashboardTablesTable({ loadReservations }) {
+function DashboardTablesTable({ loadDashboard }) {
   const [tables, setTables] = useState([]);
   const [tableErrors, setTableErrors] = useState(null);
 
@@ -50,15 +50,16 @@ function DashboardTablesTable({ loadReservations }) {
           Finish
         </button>
       );
+    } else {
+      return <button className="btn btn-secondary" disabled>Finish</button>;
     }
-    return null;
   }
 
   async function handleFinishButtonClick(tableId) {
     if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
       await deleteTableAssignment(tableId);
       loadTables();
-      loadReservations();
+      loadDashboard();
     }
   }
 

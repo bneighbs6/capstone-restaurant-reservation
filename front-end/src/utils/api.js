@@ -115,7 +115,7 @@ export async function seatReservation(tableAssignment, signal) {
   return await fetchJson(url, options, {});
 };
 
-export default async function deleteTableAssignment(tableId) {
+export async function deleteTableAssignment(tableId) {
   const url = `${API_BASE_URL}/tables/${tableId}/seat`;
   return await fetchJson(url, { method: "DELETE", headers }, {});
 }

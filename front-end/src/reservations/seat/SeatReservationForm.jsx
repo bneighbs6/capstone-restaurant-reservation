@@ -15,7 +15,9 @@ function SeatReservationForm() {
         reservation_id,
     });
 
-    useEffect(loadDashboard, []);
+    // Adding abortController to avoid the below error:
+    // React Hook useEffect has a missing dependency: 'abortController'
+    useEffect(loadDashboard, [abortController]); 
 
     function loadDashboard() {
         listTables(abortController.signal).then(setTables).catch(setError);
