@@ -31,7 +31,7 @@ function hasTableName(req, res, next) {
 // Verifies table_name is atleast 2 characters long
 function tableNameIsAtleastTwoCharacters(req, res, next) {
     const { data: { table_name } = {} } = req.body;
-    if (table_name.length > 2) {
+    if (table_name.length >= 2) {
         return next();
     }
     next({
@@ -91,8 +91,7 @@ async function reservationIdExists(req, res, next) {
 }
 
 function tableHasCapacity(req, res, next) {
-  const { table } = res.locals; 
-  const { data: { reservation } = {} } = req.body; 
+  const { table, reservation } = res.locals; 
   if (table && reservation && table.capacity >= reservation.people) {
       return next();
   }
@@ -103,7 +102,7 @@ function tableHasCapacity(req, res, next) {
 }
 
 function tableIsNotOccupied(req, res, next) {
-  const { data: { table } = {} } = req.body; 
+  const { table } = res.locals; 
   if (table && table.reservation_id) {
     return next();
   }
