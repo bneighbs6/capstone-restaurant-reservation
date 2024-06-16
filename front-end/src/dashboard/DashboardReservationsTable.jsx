@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { formatAsTime } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 
 
-function DashboardReservationsTable({ reservations, loadReservations }) {
+function DashboardReservationsTable({ reservations }) {
   const location = useLocation(); 
 
   const [error, setError] = useState(null);
