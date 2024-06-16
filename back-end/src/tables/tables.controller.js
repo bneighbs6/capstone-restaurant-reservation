@@ -26,7 +26,6 @@ function hasTableName(req, res, next) {
         status:400, 
         message: "Request body must have a table_name"
     });
-    return next(); 
 }
 
 // Verifies table_name is atleast 2 characters long
@@ -56,6 +55,18 @@ function hasCapacity(req, res, next) {
  * VALIDATION MIDDLEWARE FOR PUT /tables/:table_id/seat
  */ 
 
+async function tableExists(req, res, next) {
+  const table = await service.readTable(req.params.table_id);
+  if (table) {
+    res.locals.table = table; 
+    return next(); 
+  }
+  next({
+    status: 404, 
+    message: `Table with id ${req.params.table_id} does not exist.`
+  })
+}
+
 function hasReservationId(req, res, next) {
   const { data: { reservation_id } = {} } = req.body; 
   if (reservation_id) {
@@ -80,14 +91,41 @@ async function reservationIdExists(req, res, next) {
 }
 
 function tableHasCapacity(req, res, next) {
-  const { table, reservation } = res.locals; 
+  const { table } = res.locals; 
+  const { data: { reservation } = {} } = req.body; 
   if (table && reservation && table.capacity >= reservation.people) {
-    return next();
+      return next();
   }
   next({
-    status: 400,
-    message: "This table does not have sufficient capacity for this reservation"
-  })
+    status: 400, 
+    message: "Table does not have sufficient capacity for this reservation."
+  });
+}
+
+function tableIsNotOccupied(req, res, next) {
+  const { table } = res.locals; 
+  if (table && table.reservation_id) {
+    if (req.method === "DELETE") {
+      return next(); 
+    }
+    if (req.method === "PUT") {
+      next({
+        status: 400,
+        message: `${table.table_name} is currently occupied.`
+      });
+    }
+  }
+
+  if (req.method === "DELETE") {
+    next({
+      status: 400, 
+      message: "Table is not currently occupied."
+    });
+  }
+
+  if (req.method === "PUT") {
+    return next(); 
+  }
 }
 
 async function create(req, res, next) {
@@ -109,6 +147,6 @@ async function list(req, res, next) {
 
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
-  update: [hasData, hasReservationId, reservationIdExists, tableHasCapacity, asyncErrorBoundary(update)],
+  update: [hasData, asyncErrorBoundary(tableExists), hasReservationId, asyncErrorBoundary(reservationIdExists), tableHasCapacity, tableIsNotOccupied, asyncErrorBoundary(update)],
   list: asyncErrorBoundary(list),
 };
