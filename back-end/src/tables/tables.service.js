@@ -23,7 +23,7 @@ async function updateTableAssignment(table_id, reservation_id) {
     const trx = await knex.transaction();
     return trx("reservations")
     .where({ reservation_id })
-    .update({ status: seated }, "*")
+    .update({ status: "seated" }, "*")
     .then(() => 
         trx("tables")
             .where({ table_id })

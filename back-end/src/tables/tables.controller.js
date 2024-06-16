@@ -82,6 +82,7 @@ async function reservationIdExists(req, res, next) {
   const { data: { reservation_id } = {} } = req.body; 
   const reservation = await service.readReservation(reservation_id);
   if (reservation) {
+    res.locals.reservation = reservation; 
     return next();
   }
   next({
@@ -104,12 +105,12 @@ function tableHasCapacity(req, res, next) {
 function tableIsNotOccupied(req, res, next) {
   const { table } = res.locals; 
   if (table && table.reservation_id) {
-    return next();
+    next({
+      status: 400,
+      message: `Table ${table.reservation_id} is occupied.`
+    })
   }
-  next({
-    status: 400,
-    message: `Table ${table.reservation_id} is occupied.`
-  })
+  return next(); 
 }
 
 async function create(req, res, next) {
