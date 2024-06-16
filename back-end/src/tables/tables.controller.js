@@ -103,29 +103,14 @@ function tableHasCapacity(req, res, next) {
 }
 
 function tableIsNotOccupied(req, res, next) {
-  const { table } = res.locals; 
+  const { data: { table } = {} } = req.body; 
   if (table && table.reservation_id) {
-    if (req.method === "DELETE") {
-      return next(); 
-    }
-    if (req.method === "PUT") {
-      next({
-        status: 400,
-        message: `${table.table_name} is currently occupied.`
-      });
-    }
+    return next();
   }
-
-  if (req.method === "DELETE") {
-    next({
-      status: 400, 
-      message: "Table is not currently occupied."
-    });
-  }
-
-  if (req.method === "PUT") {
-    return next(); 
-  }
+  next({
+    status: 400,
+    message: `Table ${table.reservation_id} is occupied.`
+  })
 }
 
 async function create(req, res, next) {
