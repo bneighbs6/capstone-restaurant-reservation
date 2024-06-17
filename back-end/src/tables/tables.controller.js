@@ -103,6 +103,13 @@ function tableHasCapacity(req, res, next) {
   });
 }
 
+// Checks if table is occupied or not
+// If table reservation_id is true
+  // if request method is delete go to next middleware
+  // // if req.method is PUT send an error
+// If table reservation_id is NOT truthy
+  // if req.method is DELETE send an error
+  // if req.method is PUT go to next middleware 
 function tableIsNotOccupied(req, res, next) {
   const { table } = res.locals; 
   if (table && table.reservation_id) {
