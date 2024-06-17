@@ -115,6 +115,8 @@ export async function seatReservation(tableAssignment, signal) {
   return await fetchJson(url, options, {});
 };
 
+// Deletes a table assignment from occupied to free
+// Removes the reservation from the occupied table 
 export async function deleteTableAssignment(tableId) {
   const url = `${API_BASE_URL}/tables/${tableId}/seat`;
   return await fetchJson(url, { method: "DELETE", headers }, {});

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { listTables } from "../utils/api";
+import { deleteTableAssignment, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function DashboardTablesTable({ loadDashboard }) {
   const [tables, setTables] = useState([]);
   const [tableErrors, setTableErrors] = useState(null);
-
-  useEffect(loadTables, []);
 
   function loadTables() {
     const abortController = new AbortController();
@@ -14,6 +12,8 @@ function DashboardTablesTable({ loadDashboard }) {
     listTables(abortController.signal).then(setTables).catch(setTableErrors);
     return () => abortController.abort();
   }
+
+  useEffect(loadTables, []);
 
   const tablesListItem = tables.map((table) => {
     let tableStatus = "Free";
@@ -26,6 +26,43 @@ function DashboardTablesTable({ loadDashboard }) {
       occupant = ` by Reservation ID: ${table.reservation_id}`;
     }
 
+    // Displays a "Finish" button 
+    // button is disabled until table is occupied
+    function FinishButton({ tableStatus, tableId }) {
+      if (tableStatus === "Occupied") {
+        return (
+          <button
+            type="button"
+            className="btn btn-success btn-sm"
+            data-table-id-finish={tableId}
+            onClick={handleFinishButtonClick}
+          >
+            Finish
+          </button>
+        );
+      }
+      return (
+        <button
+        type="button"
+        className="btn btn-success btn-sm"
+        data-table-id-finish={tableId}
+        disabled
+        >
+          Finish
+        </button>
+      )
+    }
+
+    // When clicked will delete reservation
+    // Needs to display tables and dashboard 
+    async function handleFinishButtonClick(tableId) {
+      if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
+        await deleteTableAssignment(tableId);
+        loadDashboard();
+        loadTables();
+      }
+    }
+
     return (
       <li className="list-group-item col" key={table.table_id}>
         <div>{table.table_name}</div>
@@ -35,6 +72,7 @@ function DashboardTablesTable({ loadDashboard }) {
         <p>
           {occupant}
         </p>
+        <FinishButton tableStatus={tableStatus} tableId={table.table_id} />
       </li>
     );
   });
