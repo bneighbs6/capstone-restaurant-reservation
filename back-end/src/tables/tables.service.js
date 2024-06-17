@@ -34,6 +34,12 @@ async function updateTableAssignment(table_id, reservation_id) {
     .then(() => updatedTable)
     .catch(trx.rollback);
 }
+
+// Deletes table by table_id
+function destroy(table_id) {
+    return knex("tables").where({ table_id }).del();
+}
+
 // Lists tables by table name
 function list() {
     return knex("tables").select("*").orderBy("table_name");
@@ -44,5 +50,6 @@ module.exports = {
     readTable,
     readReservation, 
     updateTableAssignment,
+    delete: destroy,
     list,
 }

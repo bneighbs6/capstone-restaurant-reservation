@@ -51,6 +51,7 @@ function hasCapacity(req, res, next) {
         message: "Request body requires a capacity"
     })
   }
+
 /** 
  * VALIDATION MIDDLEWARE FOR PUT /tables/:table_id/seat
  */ 
@@ -105,12 +106,29 @@ function tableHasCapacity(req, res, next) {
 function tableIsNotOccupied(req, res, next) {
   const { table } = res.locals; 
   if (table && table.reservation_id) {
+    if (req.method === "DELETE") {
+      return next();
+    }
+
+    if (req.method === "PUT") {
+      next({
+        status: 400,
+        message: `Table ${table.reservation_id} is occupied.`
+      });
+    }
+  }
+
+  if (req.method === "DELETE") {
     next({
       status: 400,
-      message: `Table ${table.reservation_id} is occupied.`
-    })
+      message: "Table is not occupied."
+    });
   }
-  return next(); 
+
+  if (req.method === "PUT") {
+    return next(); 
+  }
+
 }
 
 async function create(req, res, next) {
@@ -126,6 +144,12 @@ async function update(req, res, next) {
   res.json({ data });
 }
 
+async function destroy(req, res, next) {
+  const { table } = res.locals; 
+  await service.delete(table.table_id);
+  res.sendStatus(200);
+}
+
 async function list(req, res, next) {
   res.json({ data: await service.list() });
 }
@@ -133,5 +157,6 @@ async function list(req, res, next) {
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
   update: [hasData, asyncErrorBoundary(tableExists), hasReservationId, asyncErrorBoundary(reservationIdExists), tableHasCapacity, tableIsNotOccupied, asyncErrorBoundary(update)],
+  delete: [asyncErrorBoundary(tableExists), tableIsNotOccupied, asyncErrorBoundary(destroy)],
   list: asyncErrorBoundary(list),
 };
