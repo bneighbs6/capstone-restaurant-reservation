@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteTableAssignment, listTables } from "../utils/api";
+import { deleteTableAssignment, deleteTableStatus, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function DashboardTablesTable({ loadDashboard }) {
@@ -23,7 +23,7 @@ function DashboardTablesTable({ loadDashboard }) {
 
     let occupant = null;
     if (tableStatus === "Occupied") {
-      occupant = ` by Reservation ID: ${table.reservation_id}`;
+      occupant = ` by Reservation ID: ${table.reservation_id}, name: ${table.first_name}`;
     }
 
     // Displays a "Finish" button 
@@ -35,7 +35,7 @@ function DashboardTablesTable({ loadDashboard }) {
             type="button"
             className="btn btn-success btn-sm"
             data-table-id-finish={tableId}
-            onClick={handleFinishButtonClick}
+            onClick={() => handleFinishButtonClick(tableId)}
           >
             Finish
           </button>
@@ -58,8 +58,8 @@ function DashboardTablesTable({ loadDashboard }) {
     async function handleFinishButtonClick(tableId) {
       if (window.confirm("Is this table ready to seat new guests? This cannot be undone.")) {
         await deleteTableAssignment(tableId);
-        loadDashboard();
-        loadTables();
+        loadDashboard(); // Reloads dashboard 
+        loadTables(); // Reloads Tables
       }
     }
 
