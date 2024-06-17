@@ -35,10 +35,24 @@ async function updateTableAssignment(table_id, reservation_id) {
     .catch(trx.rollback);
 }
 
-// Deletes table by table_id
-function destroy(table_id) {
-    return knex("tables").where({ table_id }).del();
-}
+// Changes table's status from "seated" to "finished"
+// Updates Tables table to show nobody seated at that table anymore
+async function deleteTableStatus(table_id, reservation_id) {
+    const trx = await knex.transaction();
+    let updatedTable = {};
+    return trx("reservations")
+      .where({ reservation_id })
+      .update({ status: "finished" })
+      .then(() =>
+        trx("tables")
+          .where({ table_id })
+          .update({ reservation_id: null }, "*")
+          .then((results) => (updatedTable = results[0]))
+      )
+      .then(trx.commit)
+      .then(() => updatedTable)
+      .catch(trx.rollback);
+  }
 
 // Lists tables by table name
 function list() {
@@ -50,6 +64,6 @@ module.exports = {
     readTable,
     readReservation, 
     updateTableAssignment,
-    delete: destroy,
+    deleteTableStatus,
     list,
 }

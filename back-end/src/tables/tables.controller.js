@@ -64,10 +64,11 @@ async function tableExists(req, res, next) {
   }
   next({
     status: 404, 
-    message: `Table with id ${req.params.table_id} does not exist.`
+    message: `Table id ${req.params.table_id} does not exist.`
   })
 }
 
+// Checks if request body has reservation_id
 function hasReservationId(req, res, next) {
   const { data: { reservation_id } = {} } = req.body; 
   if (reservation_id) {
@@ -79,6 +80,7 @@ function hasReservationId(req, res, next) {
   })
 }
 
+// Checks if reservationId exists
 async function reservationIdExists(req, res, next) {
   const { data: { reservation_id } = {} } = req.body; 
   const reservation = await service.readReservation(reservation_id);
@@ -92,6 +94,7 @@ async function reservationIdExists(req, res, next) {
   });
 }
 
+// Checks if table has enough capacity for the amount of people
 function tableHasCapacity(req, res, next) {
   const { table, reservation } = res.locals; 
   if (table && reservation && table.capacity >= reservation.people) {
@@ -152,9 +155,9 @@ async function update(req, res, next) {
 }
 
 async function destroy(req, res, next) {
-  const { table } = res.locals; 
-  await service.delete(table.table_id);
-  res.sendStatus(200);
+  const { table_id, reservation_id } = res.locals.table;
+  const data = await service.deleteTableStatus(table_id, reservation_id); 
+  res.json({ data });
 }
 
 async function list(req, res, next) {
