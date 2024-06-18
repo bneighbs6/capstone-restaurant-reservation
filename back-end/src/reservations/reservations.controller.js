@@ -2,7 +2,9 @@ const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const P = require("pino");
 
-// TODO: Validation middleware for create handler
+/** 
+ * Validation middleware for create handler
+*/
 
 // Verifies that reservation has data inputted
 function hasData(req, res, next) {

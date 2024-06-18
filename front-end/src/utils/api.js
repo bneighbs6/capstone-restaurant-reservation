@@ -120,9 +120,9 @@ export async function seatReservation(tableAssignment, signal) {
 export async function deleteTableAssignment(tableId) {
   const url = `${API_BASE_URL}/tables/${tableId}/seat`;
   try {
-    const response = await fetchJson(url, { method: "DELETE", headers }, {});
-    console.log("Table assignment deleted successfully", response);
-    return response;
+    const deletedTable = await fetchJson(url, { method: "DELETE", headers }, {});
+    console.log("Table assignment deleted successfully", deletedTable);
+    return deletedTable;
   } catch (error) {
     console.error("Error deleting table assignment", error);
     throw error;
