@@ -185,7 +185,36 @@ async function reservationIdExists(req, res, next) {
  */
 
 function hasValidStatus(req, res, next) {
+  const { data: { status } = {} } = req.body;
+  const validStatus = ["booked", "seated", "finished", "cancelled"];
 
+  if (req.method === "POST" && status && status !== "booked") {
+    next({
+      status: 400,
+      message: `New reservation cannot have status of ${status}.`,
+    });
+  }
+
+  if (req.method === "PUT" && status && !validStatus.includes(status)) {
+    next({
+      status: 400,
+      message: `Reservation cannot be updated if it has a status of ${status}.`
+    });
+  }
+
+  return next();
+}
+
+function statusIsNotFinished(req, res, next) {
+  const { reservation } = res.locals;
+  if (reservation && reservation.status !== "booked") {
+    next({
+      status: 400,
+      message: `A ${reservation.status} reservation cannot be updated or cancelled.`,
+    });
+  }
+
+  return next();
 }
 
 
@@ -235,6 +264,7 @@ async function list(req, res) {
 module.exports = {
   create: [
     hasData, 
+    hasValidStatus,
     hasFirstName, 
     hasLastName, 
     hasMobileNumber,
@@ -247,6 +277,6 @@ module.exports = {
     asyncErrorBoundary(create)
   ],
   read: [asyncErrorBoundary(reservationIdExists), asyncErrorBoundary(read)],
-  updateReservationStatus: [asyncErrorBoundary(reservationIdExists), asyncErrorBoundary(updateReservationStatus)],
+  updateReservationStatus: [asyncErrorBoundary(reservationIdExists), hasValidStatus, statusIsNotFinished, asyncErrorBoundary(updateReservationStatus)],
   list: asyncErrorBoundary(list),
 };
