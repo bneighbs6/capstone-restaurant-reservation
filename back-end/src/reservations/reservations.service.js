@@ -15,6 +15,11 @@ function read(reservation_id) {
     .first();
 }
 
+// TODO: create update() function 
+function updateReservationStatus() {
+    
+}
+
 // Lists reservations by date and orders by time
 function listReservationsByDate(reservation_date) {
     return knex("reservations")
@@ -26,5 +31,6 @@ function listReservationsByDate(reservation_date) {
 module.exports = {
     create,
     read,
+    updateReservationStatus,
     listReservationsByDate,
 }

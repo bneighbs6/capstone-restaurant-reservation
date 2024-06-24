@@ -50,6 +50,7 @@ function DashboardReservationsTable({ reservations }) {
             <th>Last Name</th>
             <th>Mobile Number</th>
             <th>Number of People</th>
+            <th>Reservation Status</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
