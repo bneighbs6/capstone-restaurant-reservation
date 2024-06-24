@@ -1,6 +1,7 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const P = require("pino");
+const { update } = require("../db/connection");
 
 /** 
  * Validation middleware for create handler
@@ -177,6 +178,17 @@ async function reservationIdExists(req, res, next) {
   }
   next({ status: 404, message: "Reservation Id not found."})
 }
+
+
+/**
+ * Validation Middleware for UpdateReservationStatus
+ */
+
+function hasValidStatus(req, res, next) {
+
+}
+
+
 /**
  * Create handler for reservations
  */
@@ -192,6 +204,21 @@ async function create(req, res) {
 
 function read(req, res) {
   res.json({ data: res.locals.reservation })
+}
+
+/**
+ * Update reservation status handler
+ */
+
+async function updateReservationStatus(req, res, next) {
+  const { reservation } = res.locals;
+  const newStatus = req.body.data.status;  
+  const reservationNewStatus = {
+    ...reservation,
+    status: newStatus,
+  };
+  const data = await service.update(reservationNewStatus);
+  res.json({ data });
 }
 
 /**
@@ -219,6 +246,7 @@ module.exports = {
     hasPeople, 
     asyncErrorBoundary(create)
   ],
-  read: [reservationIdExists, asyncErrorBoundary(read)],
+  read: [asyncErrorBoundary(reservationIdExists), asyncErrorBoundary(read)],
+  updateReservationStatus: [asyncErrorBoundary(reservationIdExists), asyncErrorBoundary(updateReservationStatus)],
   list: asyncErrorBoundary(list),
 };
