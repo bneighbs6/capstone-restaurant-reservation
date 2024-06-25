@@ -170,13 +170,19 @@ function hasPeople(req, res, next) {
  * VALIDATION MIDDLEWARE FOR READ
  */
 
+// Checks if reservationId exists
 async function reservationIdExists(req, res, next) {
+  // const { data: { reservation_id } = {} } = req.body; 
+  const { reservation_id } = req.params; 
   const reservation = await service.read(req.params.reservation_id);
   if (reservation) {
-    res.locals.reservation = reservation;
+    res.locals.reservation = reservation; 
     return next();
   }
-  next({ status: 404, message: "Reservation Id not found."})
+  next({
+    status: 404,
+    message: `Reservation ID: ${reservation_id} does not exist.`
+  });
 }
 
 
