@@ -19,6 +19,7 @@ function DashboardReservationsTable({ reservations }) {
           <td>{reservation.last_name}</td>
           <td>{reservation.mobile_number}</td>
           <td>{reservation.people}</td>
+          <td>{reservation.status}</td>
           <SeatReservationButton 
           reservation_id={reservation.reservation_id}
           status={reservation.status}

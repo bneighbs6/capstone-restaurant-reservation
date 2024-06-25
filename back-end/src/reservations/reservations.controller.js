@@ -190,9 +190,12 @@ async function reservationIdExists(req, res, next) {
  * Validation Middleware for UpdateReservationStatus
  */
 
+
+// TODO: Check why it is not returning 200 for status of 'booked' 'seated' & 'finished'
+// my theory is that we need to fix the frontend 
 function hasValidStatus(req, res, next) {
-  const { data: { status } = {} } = req.body;
-  const validStatus = ["booked", "seated", "finished", "cancelled"];
+  const { status } = req.body.data;
+  const validStatuses = ["booked", "seated", "finished", "cancelled"];
 
   if (req.method === "POST" && status && status !== "booked") {
     next({
@@ -201,10 +204,10 @@ function hasValidStatus(req, res, next) {
     });
   }
 
-  if (req.method === "PUT" && status && !validStatus.includes(status)) {
+  if (req.method === "PUT" && status && !validStatuses.includes(status)) {
     next({
       status: 400,
-      message: `Reservation cannot be updated if it has a status of ${status}.`
+      message: `A reservation cannot be updated if it has a status of ${status}.`,
     });
   }
 
@@ -248,11 +251,11 @@ function read(req, res) {
 async function updateReservationStatus(req, res, next) {
   const { reservation } = res.locals;
   const newStatus = req.body.data.status;  
-  const reservationNewStatus = {
+  const newReservation = {
     ...reservation,
     status: newStatus,
   };
-  const data = await service.update(reservationNewStatus);
+  const data = await service.update(newReservation);
   res.json({ data });
 }
 
