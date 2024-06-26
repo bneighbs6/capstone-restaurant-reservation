@@ -191,7 +191,6 @@ async function reservationIdExists(req, res, next) {
  */
 
 
-// TODO: Check why it is not returning 200 for status of 'booked' 'seated' & 'finished'
 function hasValidStatus(req, res, next) {
   const { status } = req.body.data;
   const validStatuses = ["booked", "seated", "finished", "cancelled"];
@@ -263,6 +262,15 @@ async function updateReservationStatus(req, res, next) {
 /**
  * List handler for reservation resources
  */
+
+// // validation that reservation is not "finished"
+// function reservationIsNotFinished (req, res, next) {
+//   const { reservation } = res.locals; 
+//   if (reservation.status !== "finished") {
+//     return next();
+//   }
+// }
+
 async function list(req, res) {
   const { date } = req.query;
   if (date) {
@@ -288,5 +296,5 @@ module.exports = {
   ],
   read: [asyncErrorBoundary(reservationIdExists), asyncErrorBoundary(read)],
   updateReservationStatus: [asyncErrorBoundary(reservationIdExists), hasValidStatus, statusIsNotFinished, asyncErrorBoundary(updateReservationStatus)],
-  list: asyncErrorBoundary(list),
+  list: [asyncErrorBoundary(list)],
 };
