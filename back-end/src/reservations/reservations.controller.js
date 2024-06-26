@@ -192,11 +192,11 @@ async function reservationIdExists(req, res, next) {
 
 
 // TODO: Check why it is not returning 200 for status of 'booked' 'seated' & 'finished'
-// my theory is that we need to fix the frontend 
 function hasValidStatus(req, res, next) {
   const { status } = req.body.data;
   const validStatuses = ["booked", "seated", "finished", "cancelled"];
 
+  // If request method is post and status exists and is not "booked" return 400
   if (req.method === "POST" && status && status !== "booked") {
     next({
       status: 400,
@@ -204,6 +204,7 @@ function hasValidStatus(req, res, next) {
     });
   }
 
+  // If request method is PUT and status exists but is not included in validStatuses, return 400
   if (req.method === "PUT" && status && !validStatuses.includes(status)) {
     next({
       status: 400,
