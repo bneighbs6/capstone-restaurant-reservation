@@ -19,7 +19,7 @@ function DashboardReservationsTable({ reservations }) {
           <td>{reservation.last_name}</td>
           <td>{reservation.mobile_number}</td>
           <td>{reservation.people}</td>
-          <td>{reservation.status}</td>
+          <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
           <SeatReservationButton 
           reservation_id={reservation.reservation_id}
           status={reservation.status}
@@ -35,7 +35,7 @@ function DashboardReservationsTable({ reservations }) {
           href={`/reservations/${reservation_id}/seat`}
           role="button"
           >
-            Seat
+            Seat Reservation
           </a>
         );
     }
