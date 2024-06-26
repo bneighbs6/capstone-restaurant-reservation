@@ -28,7 +28,8 @@ function DashboardReservationsTable({ reservations }) {
       );
     });
 
-    function SeatReservationButton({ reservation_id }) {
+    function SeatReservationButton({ reservation_id, status }) {
+      if (status === 'booked') {
         return (
           <a
           className="btn btn-primary"
@@ -38,6 +39,9 @@ function DashboardReservationsTable({ reservations }) {
             Seat Reservation
           </a>
         );
+      } else {
+        return null; 
+      }
     }
   
     return (
