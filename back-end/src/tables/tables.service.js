@@ -19,7 +19,7 @@ function readReservation(reservation_id) {
 } 
 
 // Updates table assignment
-async function updateTableAssignment(table_id, reservation_id) {
+async function updateTableStatus(table_id, reservation_id) {
     const trx = await knex.transaction();
     return trx("reservations")
     .where({ reservation_id })
@@ -63,7 +63,7 @@ module.exports = {
     create,
     readTable,
     readReservation, 
-    updateTableAssignment,
+    updateTableStatus,
     deleteTableStatus,
     list,
 }

@@ -150,7 +150,7 @@ async function update(req, res, next) {
   const { table_id } = res.locals.table
   const { reservation_id } = req.body.data; 
 
-  const data = await service.updateTableAssignment(table_id, reservation_id);
+  const data = await service.updateTableStatus(table_id, reservation_id);
   res.json({ data });
 }
 
