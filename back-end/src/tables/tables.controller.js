@@ -94,6 +94,18 @@ async function reservationIdExists(req, res, next) {
   });
 }
 
+// Checks if reservation is not 'seated'
+function reservationIsNotSeated(req, res, next) {
+  const { reservation, reservationId } = res.locals;
+  if (reservation && reservation.status !== "seated") {
+    return next();
+  }
+  next({
+    status: 400,
+    message: `Table ${table} is already seated. Status: ${table.status}.`
+  })
+}
+
 // Checks if table has enough capacity for the amount of people
 function tableHasCapacity(req, res, next) {
   const { table, reservation } = res.locals; 
@@ -166,7 +178,7 @@ async function list(req, res, next) {
 
 module.exports = {
   create: [hasData, hasTableName, tableNameIsAtleastTwoCharacters, hasCapacity, asyncErrorBoundary(create)],
-  update: [hasData, asyncErrorBoundary(tableExists), hasReservationId, asyncErrorBoundary(reservationIdExists), tableHasCapacity, tableIsNotOccupied, asyncErrorBoundary(update)],
+  update: [hasData, asyncErrorBoundary(tableExists), hasReservationId, asyncErrorBoundary(reservationIdExists), reservationIsNotSeated, tableHasCapacity, tableIsNotOccupied, asyncErrorBoundary(update)],
   delete: [asyncErrorBoundary(tableExists), tableIsNotOccupied, asyncErrorBoundary(destroy)],
   list: asyncErrorBoundary(list),
 };
