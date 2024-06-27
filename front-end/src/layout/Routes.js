@@ -6,6 +6,7 @@ import { today } from "../utils/date-time";
 import ReservationForm from "../reservations/create/ReservationForm.jsx";
 import TableCreate from "../tables/TableCreate.jsx";
 import SeatReservationForm from "../reservations/seat/SeatReservationForm.jsx";
+import SearchReservation from "../reservations/search/SearchReservation.jsx";
 
 /**
  * Defines all the routes for the application.
@@ -40,6 +41,10 @@ function Routes() {
 
       <Route path="/tables/new">
         <TableCreate />
+      </Route>
+
+      <Route path="/search">
+        <SearchReservation />
       </Route>
 
       <Route>
