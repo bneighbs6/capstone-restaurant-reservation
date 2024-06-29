@@ -21,16 +21,12 @@ function SearchReservation() {
   }
 
   function submitHandler(e) {
-    // Enter necessary code
-    // Clicking on the "Find" button will submit a request to the server
-    // (e.g. GET /reservations?mobile_number=800-555-1212).
     e.preventDefault();
     const abortController = new AbortController();
     setError(null);
     listReservations(phoneNumber, abortController.signal)
       .then(setFoundReservation)
       .catch(setError);
-      console.log("Find button clicked.");
     return () => abortController.abort();
   }
 
@@ -67,7 +63,7 @@ function SearchReservation() {
             setFoundReservation={setFoundReservation}
           />
         </div>
-      ) : null}
+      ) : "/No reservations found/"}
     </main>
   );
 }
