@@ -5,22 +5,40 @@ import DashboardReservationsTable from "../../dashboard/DashboardReservationsTab
 
 function SearchReservation() {
 
-  // These will need to be changed using useState
+  // useState variables
   const [phoneNumber, setPhoneNumber] = useState({
     mobile_number: "",
   });
   const [foundReservation, setFoundReservation] = useState(null);
   const [error, setError] = useState(null);
 
-    function findButtonHandler() {
-        console.log("Find button clicked.")
-        // Enter necessary code
-        // Clicking on the "Find" button will submit a request to the server 
-        // (e.g. GET /reservations?mobile_number=800-555-1212).
+  function loadReservations() {
+    const abortController = new AbortController();
+    setError(null);
+    listReservations(phoneNumber, abortController.signal)
+    .then(setFoundReservation)
+    .catch(setError);
+    return () => abortController.abort(); 
+  }
+
+    function findButtonHandler(e) {
+      console.log("Find button clicked.");
+      // Enter necessary code
+      // Clicking on the "Find" button will submit a request to the server
+      // (e.g. GET /reservations?mobile_number=800-555-1212).
+      e.preventDefault();
+      const abortController = new AbortController();
+      setError(null);
+      listReservations(phoneNumber, abortController.signal)
+        .then(setFoundReservation)
+        .catch(setError);
+      return () => abortController.abort();
     }
 
     function changeHandler({ target: { name, value } }) {
-      setPhoneN
+      setPhoneNumber(() => ({
+        [name]: value, 
+      }));
     }
 
 
