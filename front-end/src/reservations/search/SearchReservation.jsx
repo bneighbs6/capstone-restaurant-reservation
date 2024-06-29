@@ -11,14 +11,14 @@ function SearchReservation() {
   const [foundReservation, setFoundReservation] = useState(null);
   const [error, setError] = useState(null);
 
-  function loadReservations() {
-    const abortController = new AbortController();
-    setError(null);
-    listReservations(phoneNumber, abortController.signal)
-      .then(setFoundReservation)
-      .catch(setError);
-    return () => abortController.abort();
-  }
+  // function loadReservations() {
+  //   const abortController = new AbortController();
+  //   setError(null);
+  //   listReservations(phoneNumber, abortController.signal)
+  //     .then(setFoundReservation)
+  //     .catch(setError);
+  //   return () => abortController.abort();
+  // }
 
   function submitHandler(e) {
     e.preventDefault();
@@ -58,12 +58,11 @@ function SearchReservation() {
         <div className="row">
           <h4>Matched Reservations:</h4>
           <DashboardReservationsTable
-            loadReservations={loadReservations}
             reservations={foundReservation}
             setFoundReservation={setFoundReservation}
           />
         </div>
-      ) : "/No reservations found/"}
+      ) : null}
     </main>
   );
 }
