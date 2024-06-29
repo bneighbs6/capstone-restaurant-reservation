@@ -24,6 +24,9 @@ function DashboardReservationsTable({ reservations }) {
           reservation_id={reservation.reservation_id}
           status={reservation.status}
           />
+          <EditReservationButton
+          reservation_id={reservation.reservation_id}
+          />
         </tr>
       );
     });
@@ -50,6 +53,19 @@ function DashboardReservationsTable({ reservations }) {
       } else {
         return null; 
       }
+    }
+
+    // onClick () => take you to /reservations/${reservation_id}/edit page
+    function EditReservationButton({ reservation_id }) {
+      return (
+        <a
+        className="btn btn-warning"
+        href={`/reservations/${reservation_id}/edit`}
+        role="button"
+        >
+          Edit Reservation
+        </a>
+      )
     }
   
     return (
