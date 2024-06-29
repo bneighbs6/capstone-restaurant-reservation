@@ -305,6 +305,7 @@ module.exports = {
     hasReservationDate,
     reservationDateNotInPast,
     reservationDateNotATuesday,
+    hasReservationTime,
     hasReservationTimeInAcceptableTimes,
     hasPeople,
     asyncErrorBoundary(updateReservation),
