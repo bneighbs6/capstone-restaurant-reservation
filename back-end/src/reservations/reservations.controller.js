@@ -259,6 +259,12 @@ async function updateReservationStatus(req, res, next) {
   res.json({ data });
 }
 
+async function updateReservation(req, res, next) {
+  const updatedReservation = req.body.data;
+  const data = await service.update(updatedReservation);
+  res.json({ data });
+}
+
 /**
  * List handler for reservation resources
  */
@@ -290,6 +296,19 @@ module.exports = {
     asyncErrorBoundary(create)
   ],
   read: [asyncErrorBoundary(reservationIdExists), asyncErrorBoundary(read)],
+  updateReservation: [
+    asyncErrorBoundary(reservationIdExists),
+    statusIsNotFinished,
+    hasFirstName,
+    hasLastName,
+    hasMobileNumber,
+    hasReservationDate,
+    reservationDateNotInPast,
+    reservationDateNotATuesday,
+    hasReservationTimeInAcceptableTimes,
+    hasPeople,
+    asyncErrorBoundary(updateReservation),
+  ],
   updateReservationStatus: [asyncErrorBoundary(reservationIdExists), hasValidStatus, statusIsNotFinished, asyncErrorBoundary(updateReservationStatus)],
   list: [asyncErrorBoundary(list)],
 };
