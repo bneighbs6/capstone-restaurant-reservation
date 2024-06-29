@@ -263,19 +263,14 @@ async function updateReservationStatus(req, res, next) {
  * List handler for reservation resources
  */
 
-// // validation that reservation is not "finished"
-// function reservationIsNotFinished (req, res, next) {
-//   const { reservation } = res.locals; 
-//   if (reservation.status !== "finished") {
-//     return next();
-//   }
-// }
-
 async function list(req, res) {
-  const { date } = req.query;
+  const { date, mobile_number } = req.query;
   if (date) {
     const data = await service.listReservationsByDate(date);
     res.json({ data });
+  } else if (mobile_number) {
+    const data = await service.search(mobile_number);
+    res.json({ data })
   }
 }
 
