@@ -7,6 +7,7 @@ import ReservationForm from "../reservations/create/ReservationForm.jsx";
 import TableCreate from "../tables/TableCreate.jsx";
 import SeatReservationForm from "../reservations/seat/SeatReservationForm.jsx";
 import SearchReservation from "../reservations/search/SearchReservation.jsx";
+import EditReservation from "../reservations/edit/EditReservation.jsx";
 
 /**
  * Defines all the routes for the application.
@@ -37,6 +38,10 @@ function Routes() {
 
       <Route path="/reservations/:reservation_id/seat">
         <SeatReservationForm />
+      </Route>
+
+      <Route path="/reservations/:reservation_id/edit">
+        <EditReservation />
       </Route>
 
       <Route path="/tables/new">

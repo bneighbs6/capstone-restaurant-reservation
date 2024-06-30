@@ -29,7 +29,6 @@ function ReservationForm() {
 
     // Handles changes to the form
     function changeHandler({ target }) {
-      // TODO: This change handler will handle the changes of any item in the form 
       let value = target.value; 
       if (target.name === "people") {
         value = Number(value);
@@ -41,7 +40,6 @@ function ReservationForm() {
     };
 
     // Submits and saves form 
-    // TODO: LOOK AT FLASHCARD APP CreateDeck() component as an example for this
     function submitHandler(e) {
         e.preventDefault(); 
         const abortController = new AbortController();
