@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { readReservation, updateReservation } from "../../utils/api";
+import { readReservation, updateReservation, setReservationStatus } from "../../utils/api";
 import ReservationForm from "../create/ReservationForm";
 import ErrorAlert from "../../layout/ErrorAlert";
 
-function EditReservation() {
+function EditReservation({ loadDashboard }) {
     const [reservation, setReservation] = useState({
         first_name: "",
         last_name: "",
@@ -39,15 +39,45 @@ function EditReservation() {
         return () => abortController.abort();
       }
 
+      function CancelReservationButton({ reservation }) {
+        return (
+            <button 
+            type="button"
+            className="btn btn-danger"
+            data-reservation-id-cancel={reservation.reservation_id}
+            onClick={() => handleCancelReservationClick(reservation.reservation_id)
+            }
+            >
+                Cancel
+            </button>
+        )
+      }
+
+      function handleCancelReservationClick() {
+        if (
+            window.confirm("Do you want to cancel this reservation? This cannot be undone.")
+        ) {
+            const abortController = new AbortController();
+            setError(null);
+            setReservationStatus(reservation_id, "cancelled", abortController.signal)
+                .then(() => loadDashboard())
+                .catch(setError);
+                return () => abortController.abort()
+        }
+      }
+
       return (
         <main>
-          <h1 class="mt-lg-4 mt-1 mb-3">Edit Reservation {reservation_id}</h1>
+          <h1>Edit Reservation {reservation_id}</h1>
           <ErrorAlert error={error} />
-          <form onSubmit={submitHandler} class="row g-3">
+          <form onSubmit={submitHandler}>
             <ReservationForm
               reservation={reservation}
               setReservation={setReservation}
             />
+            <CancelReservationButton
+            reservation={reservation}
+             />
           </form>
         </main>
       );
