@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 
 
-function DashboardReservationsTable({ reservations }) {
+function DashboardReservationsTable({ reservations, loadReservations }) {
   const location = useLocation(); 
 
   const [error, setError] = useState(null);
@@ -12,6 +12,67 @@ function DashboardReservationsTable({ reservations }) {
       if (location.pathname="/dashboard" && (reservation.status === "finished" || reservation.status === "cancelled")) {
         return null;
       }
+
+      function SeatReservationButton({ reservation_id, status }) {
+        if (status === 'booked') {
+          return (
+            <a
+            className="btn btn-primary"
+            href={`/reservations/${reservation_id}/seat`}
+            role="button"
+            >
+              Seat Reservation
+            </a>
+          );
+        } else {
+          return null; 
+        }
+      }
+  
+      // onClick () => take you to /reservations/${reservation_id}/edit page
+      function EditReservationButton({ reservation_id }) {
+        return (
+          <a
+          className="btn btn-warning"
+          href={`/reservations/${reservation_id}/edit`}
+          role="button"
+          >
+            Edit Reservation
+          </a>
+        )
+      }
+  
+  
+  
+      function CancelReservationButton({ reservation }) {
+        return (
+            <button 
+            type="button"
+            className="btn btn-danger"
+            data-reservation-id-cancel={reservation.reservation_id}
+            onClick={() => handleCancelReservationButtonClick(reservation.reservation_id)
+            }
+            >
+                Cancel Reservation
+            </button>
+        )
+      }
+  
+      function handleCancelReservationButtonClick(reservation_id) {
+        if (
+          window.confirm(
+            "Do you want to cancel this reservation? This cannot be undone."
+          )
+        ) {
+          const abortController = new AbortController();
+          setError(null);
+          setReservationStatus(reservation_id, "cancelled", abortController.signal)
+            .then(() => loadReservations())
+            .catch(setError);
+          return () => abortController.abort();
+        }
+      }
+
       return (
         <tr key={reservation.reservation_id}>
           <td>{reservation.reservation_id}</td>
@@ -27,6 +88,9 @@ function DashboardReservationsTable({ reservations }) {
           <EditReservationButton
           reservation_id={reservation.reservation_id}
           />
+          <CancelReservationButton
+          reservation={reservation}
+          />
         </tr>
       );
     });
@@ -37,35 +101,6 @@ function DashboardReservationsTable({ reservations }) {
           No reservations found.
         </div>
       );
-    }
-
-    function SeatReservationButton({ reservation_id, status }) {
-      if (status === 'booked') {
-        return (
-          <a
-          className="btn btn-primary"
-          href={`/reservations/${reservation_id}/seat`}
-          role="button"
-          >
-            Seat Reservation
-          </a>
-        );
-      } else {
-        return null; 
-      }
-    }
-
-    // onClick () => take you to /reservations/${reservation_id}/edit page
-    function EditReservationButton({ reservation_id }) {
-      return (
-        <a
-        className="btn btn-warning"
-        href={`/reservations/${reservation_id}/edit`}
-        role="button"
-        >
-          Edit Reservation
-        </a>
-      )
     }
   
     return (

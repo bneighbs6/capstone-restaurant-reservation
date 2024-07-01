@@ -39,33 +39,6 @@ function EditReservation({ loadDashboard }) {
         return () => abortController.abort();
       }
 
-      function CancelReservationButton({ reservation }) {
-        return (
-            <button 
-            type="button"
-            className="btn btn-danger"
-            data-reservation-id-cancel={reservation.reservation_id}
-            onClick={() => handleCancelReservationClick(reservation.reservation_id)
-            }
-            >
-                Cancel
-            </button>
-        )
-      }
-
-      function handleCancelReservationClick() {
-        if (
-            window.confirm("Do you want to cancel this reservation? This cannot be undone.")
-        ) {
-            const abortController = new AbortController();
-            setError(null);
-            setReservationStatus(reservation_id, "cancelled", abortController.signal)
-                .then(() => loadDashboard())
-                .catch(setError);
-                return () => abortController.abort()
-        }
-      }
-
       return (
         <main>
           <h1>Edit Reservation {reservation_id}</h1>
