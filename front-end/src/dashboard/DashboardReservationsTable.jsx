@@ -84,6 +84,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
           <td>{reservation.last_name}</td>
           <td>{reservation.mobile_number}</td>
           <td>{reservation.people}</td>
+          <td>{reservation.reservation_time}</td>
           <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
           <SeatReservationButton 
           reservation_id={reservation.reservation_id}
@@ -118,6 +119,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
             <th>Last Name</th>
             <th>Mobile Number</th>
             <th>Number of People</th>
+            <th>Reservation Time</th>
             <th>Reservation Status</th>
           </tr>
         </thead>
