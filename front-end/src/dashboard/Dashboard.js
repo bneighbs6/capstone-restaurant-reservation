@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { listReservations } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-import DashboardTable from "./DashboardReservationsTable";
+import DashboardReservationsTable from "./DashboardReservationsTable";
 import DashboardTablesTable from "./DashboardTablesTable";
 import useQuery from "../utils/useQuery";
 /**
@@ -18,9 +18,10 @@ function Dashboard({ today_date }) {
   const queryDate = query.get("date");
   const date = queryDate || today_date;
 
+  // Load or reload dashboard any time date is updated.
   useEffect(loadDashboard, [date]);
 
-  function loadDashboard() {
+function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
@@ -36,7 +37,7 @@ function Dashboard({ today_date }) {
         <h4 className="mb-0">Reservations for Date: {date}</h4>
       </div>
       <ErrorAlert error={reservationsError} />
-      <DashboardTable reservations={reservations}/>
+      <DashboardReservationsTable reservations={reservations} loadDashboard={loadDashboard} />
       <DashboardTablesTable loadDashboard={loadDashboard} />
     </main>
   );
