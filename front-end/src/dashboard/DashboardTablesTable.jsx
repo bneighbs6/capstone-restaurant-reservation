@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteTableAssignment, deleteTableStatus, listTables } from "../utils/api";
+import { deleteTableAssignment, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function DashboardTablesTable({ loadDashboard }) {

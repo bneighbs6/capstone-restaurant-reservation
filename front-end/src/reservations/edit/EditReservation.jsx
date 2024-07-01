@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { readReservation, updateReservation, setReservationStatus } from "../../utils/api";
+import { readReservation, updateReservation } from "../../utils/api";
 import ReservationForm from "../create/ReservationForm";
 import ErrorAlert from "../../layout/ErrorAlert";
 
@@ -48,9 +48,6 @@ function EditReservation({ loadDashboard }) {
               reservation={reservation}
               setReservation={setReservation}
             />
-            <CancelReservationButton
-            reservation={reservation}
-             />
           </form>
         </main>
       );

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
+import { setReservationStatus } from "../utils/api";
 
 
-function DashboardReservationsTable({ reservations, loadReservations }) {
+function DashboardReservationsTable({ reservations, loadDashboard }) {
   const location = useLocation(); 
 
   const [error, setError] = useState(null);
 
     const rows = Array.isArray(reservations) && reservations.map((reservation, index) => {
-      if (location.pathname="/dashboard" && (reservation.status === "finished" || reservation.status === "cancelled")) {
+      if (
+        location.pathname === "/dashboard" &&
+        (reservation.status === "finished" || reservation.status === "cancelled")
+      ) {
         return null;
       }
 
@@ -67,7 +71,7 @@ function DashboardReservationsTable({ reservations, loadReservations }) {
           const abortController = new AbortController();
           setError(null);
           setReservationStatus(reservation_id, "cancelled", abortController.signal)
-            .then(() => loadReservations())
+            .then(() => loadDashboard())
             .catch(setError);
           return () => abortController.abort();
         }
