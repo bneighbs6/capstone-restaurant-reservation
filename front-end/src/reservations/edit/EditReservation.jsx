@@ -4,7 +4,7 @@ import { readReservation, updateReservation } from "../../utils/api";
 import ReservationForm from "../create/ReservationForm";
 import ErrorAlert from "../../layout/ErrorAlert";
 
-function EditReservation({ loadDashboard }) {
+function EditReservation() {
     const [reservation, setReservation] = useState({
         first_name: "",
         last_name: "",
@@ -41,13 +41,10 @@ function EditReservation({ loadDashboard }) {
 
       return (
         <main>
-          <h1>Edit Reservation {reservation_id}</h1>
+          <h1>Edit Reservation {reservation_id} {reservation.first_name} {reservation.last_name}</h1>
           <ErrorAlert error={error} />
-          <form onSubmit={submitHandler}>
-            <ReservationForm
-              reservation={reservation}
-              setReservation={setReservation}
-            />
+          <form>
+            <ReservationForm onSubmit={submitHandler} />
           </form>
         </main>
       );

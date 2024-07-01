@@ -24,6 +24,7 @@ function ReservationForm() {
 
     // Go back to previous page if cancel is clicked
     function cancelHandler() {
+      console.log("Cancel clicked. Handler worked.")
       history.goBack();
     }
 
