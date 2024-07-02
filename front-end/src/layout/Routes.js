@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import ReservationForm from "../reservations/create/ReservationForm.jsx";
 import TableCreate from "../tables/TableCreate.jsx";
 import SeatReservationForm from "../reservations/seat/SeatReservationForm.jsx";
 import SearchReservation from "../reservations/search/SearchReservation.jsx";

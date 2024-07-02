@@ -67,7 +67,7 @@ function SeatReservationForm() {
                     <label htmlFor="table_assignment">
                         <h5>Assign to table</h5>
                     </label>
-                    <div className="idk"> {/* TODO: fix classname*/}
+                    <div className="col-auto pl-3">
                         <select 
                         id="table_assignment"
                         name="table_id"
