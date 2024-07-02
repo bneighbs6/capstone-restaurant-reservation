@@ -21,6 +21,7 @@ build/
 .vscode/
 .vercel
 .screenshots/
+.README(Thinkful).md
 
 npm-debug.log*
 yarn-debug.log*
