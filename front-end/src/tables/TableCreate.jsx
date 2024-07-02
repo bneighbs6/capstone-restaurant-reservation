@@ -30,8 +30,6 @@ function TableCreate() {
     return () => abortController.abort();
   }
 
-  // TODO: Need to figure out why the cancel button test is failing
-  // Test is failing because tables still aren't displaying on dashboard
   function cancelHandler() {
     history.goBack();
   }
@@ -43,7 +41,7 @@ function TableCreate() {
       <form onSubmit={submitHandler}>
 
         <div className="form-group">
-          <label htmlFor="table_name" className="form-label">Table Name</label>
+          <label htmlFor="table_name" className="form-label my-2">Table Name</label>
           <input 
           id="table_name"
           name="table_name"
@@ -53,7 +51,7 @@ function TableCreate() {
           className="form-control"
           value={table.table_name}
           />
-          <label htmlFor="capacity">Table Capacity</label>
+          <label htmlFor="capacity" className="form-label my-2">Table Capacity</label>
           <input 
           id="capacity"
           name="capacity" 
