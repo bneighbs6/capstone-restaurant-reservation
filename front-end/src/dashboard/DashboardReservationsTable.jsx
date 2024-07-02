@@ -32,7 +32,9 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
             <td data-reservation-id-status={reservation.reservation_id}>
               {reservation.status}
             </td>
-            <td>
+
+            {/* TODO: Space buttons evenly on xs-xxl screens */}
+            <td className="">
               <EditReservationButton
                 reservation_id={reservation.reservation_id}
               />
@@ -52,7 +54,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
         if (status === "booked") {
           return (
             <a
-              className="btn btn-primary btn-sm col-md-8"
+              className="btn btn-primary btn-sm my-3"
               href={`/reservations/${reservation_id}/seat`}
               role="button"
             >
@@ -68,7 +70,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
       function EditReservationButton({ reservation_id }) {
         return (
           <a
-            className="btn btn-secondary btn-sm col-md-8"
+            className="btn btn-secondary btn-sm my-3"
             href={`/reservations/${reservation_id}/edit`}
             role="button"
           >
@@ -81,7 +83,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
         return (
           <button
             type="button"
-            className="btn btn-danger btn-sm col-md-8"
+            className="btn btn-danger btn-sm my-3"
             data-reservation-id-cancel={reservation.reservation_id}
             onClick={() =>
               handleCancelReservationButtonClick(reservation.reservation_id)
