@@ -13,19 +13,19 @@ Need to add Live Demo and API docs
 
 ## Screenshots 
 
-### Dashboard (Home Page):
+### Dashboard (Home Page): x
 
-### Create Reservation:
+### Create Reservation: x
 
-### Create New Table:
+### Create New Table: x
 
-### Seat a Reseravtion:
+### Seat a Reseravtion: x
 
-### Seated Reservation: 
+### Seated Reservation: x
 
-### Finishing a Table: 
+### Finishing a Table: x
 
-### Finsihed Table: 
+### Finished Table: x
 
 ### Search for Reservation: 
 
