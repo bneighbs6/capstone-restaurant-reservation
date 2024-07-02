@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { setReservationStatus } from "../utils/api";
+import { formatAsTime } from "../utils/date-time";
 
 
 function DashboardReservationsTable({ reservations, loadDashboard }) {
@@ -12,6 +13,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
     const rows =
       Array.isArray(reservations) &&
       reservations.map((reservation, index) => {
+
         if (
           location.pathname === "/dashboard" &&
           (reservation.status === "finished" ||
@@ -19,6 +21,36 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
         ) {
           return null;
         }
+
+        return (
+          <>
+                <tr key={reservation.reservation_id}>
+                  <th scope="row">{formatAsTime(reservation.reservation_time)}</th>
+                  <td>{reservation.reservation_id}</td>
+                  <td>{reservation.first_name}</td>
+                  <td>{reservation.last_name}</td>
+                  <td>{reservation.mobile_number}</td>
+                  <td>{reservation.people}</td>
+                  <td data-reservation-id-status={reservation.reservation_id}>
+                    {reservation.status}
+                  </td>
+                </tr>
+            <div>
+            <EditReservationButton
+                    reservation_id={reservation.reservation_id}
+                  />
+            </div>
+            <div>
+            <CancelReservationButton reservation={reservation} />
+            </div>
+            <div>
+              <SeatReservationButton
+                reservation_id={reservation.reservation_id}
+                status={reservation.status}
+              />
+            </div>
+          </>
+        );
 
         function SeatReservationButton({ reservation_id, status }) {
           if (status === "booked") {
@@ -82,32 +114,6 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
             return () => abortController.abort();
           }
         }
-
-        return (
-          <>
-            <tr key={reservation.reservation_id}>
-              <td>{reservation.reservation_id}</td>
-              <td>{reservation.first_name}</td>
-              <td>{reservation.last_name}</td>
-              <td>{reservation.mobile_number}</td>
-              <td>{reservation.people}</td>
-              <td>{reservation.reservation_time}</td>
-              <td data-reservation-id-status={reservation.reservation_id}>
-                {reservation.status}
-              </td>
-              <EditReservationButton
-                reservation_id={reservation.reservation_id}
-              />
-              <CancelReservationButton reservation={reservation} />
-            </tr>
-            <div>
-              <SeatReservationButton
-                reservation_id={reservation.reservation_id}
-                status={reservation.status}
-              />
-            </div>
-          </>
-        );
       });
 
     if (reservations && !reservations.length) {
@@ -120,21 +126,24 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
   
     return (
       <>
-      <ErrorAlert error={error} />
-      <table className="col-md-6 col-lg-6">
-        <thead>
-          <tr>
-            <th>Reservation ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Mobile Number</th>
-            <th>Number of People</th>
-            <th>Reservation Time</th>
-            <th>Reservation Status</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>      
+        <ErrorAlert error={error} />
+        <div class="table-responsive">
+          <table className="table table-secondary table-hover align-middle">
+            <thead className="table-primary">
+              <tr>
+                <th>Reservation Time</th>
+                <th>Reservation ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mobile Number</th>
+                <th>Number of People</th>
+                <th>Reservation Time</th>
+                <th>Reservation Status</th>
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </table>
+        </div>
       </>
     );
   }
