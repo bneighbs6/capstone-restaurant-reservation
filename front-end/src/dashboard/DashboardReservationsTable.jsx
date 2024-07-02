@@ -112,7 +112,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
 
     if (reservations && !reservations.length) {
       return (
-        <div class="alert alert-warning py-3" role="alert">
+        <div className="alert alert-warning py-3" role="alert">
           No reservations found.
         </div>
       );
