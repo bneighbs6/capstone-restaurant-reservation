@@ -23,7 +23,7 @@ function DashboardTablesTable({ loadDashboard }) {
 
     let occupant = null;
     if (tableStatus === "Occupied") {
-      occupant = ` by Reservation ID: ${table.reservation_id}, name: ${table.first_name}`;
+      occupant = ` by Reservation ID: ${table.reservation_id}`;
     }
 
     // Displays a "Finish" button 

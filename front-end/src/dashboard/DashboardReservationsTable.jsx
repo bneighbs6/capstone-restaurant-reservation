@@ -124,7 +124,7 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
     <>
       <ErrorAlert error={error} />
       <div class="table-responsive">
-        <table className="table table-secondary table-hover align-middle">
+        <table className="table table-secondary table-hover align-middle table-sm">
           <thead className="table-primary">
             <tr>
               <th>Reservation Time</th>
