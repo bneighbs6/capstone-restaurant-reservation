@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { readReservation, updateReservation } from "../../utils/api";
+import { formatAsDate } from "../../utils/date-time";
 import ReservationForm from "../create/ReservationForm";
 import ErrorAlert from "../../layout/ErrorAlert";
 
@@ -33,7 +34,7 @@ function EditReservation() {
         setError(null);
         updateReservation(reservation, abortController.signal)
           .then(() =>
-            history.push(`/dashboard?date=${reservation.reservation_date}`)
+            history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)
           )
           .catch(setError);
         return () => abortController.abort();
@@ -44,7 +45,10 @@ function EditReservation() {
           <h1>Edit Reservation {reservation_id} {reservation.first_name} {reservation.last_name}</h1>
           <ErrorAlert error={error} />
           <form onSubmit={submitHandler}>
-            <ReservationForm />
+            <ReservationForm 
+            reservation={reservation}
+            setReservation={setReservation}
+            />
           </form>
         </main>
       );

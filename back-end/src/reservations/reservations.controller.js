@@ -116,9 +116,11 @@ function reservationDateNotATuesday(req, res, next) {
 // Verifies reservation has proper time 
 function hasReservationTime(req, res, next) {
   const { data: { reservation_time } = {} } = req.body; 
-  const regex = new RegExp(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$/);
+  const regex = new RegExp(/[0-9]{2}:[0-9]{2}/);
+  res.locals.reservation_time = reservation_time;
+
   if (reservation_time && regex.test(reservation_time)) {
-    return next(); 
+    return next();
   }
   next({
     status: 400, 
