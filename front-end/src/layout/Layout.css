@@ -2,3 +2,9 @@
   background-color: #393a44;
   min-width: 200px;
 }
+
+
+/* setting all buttons to a width of 150px */
+.btn {
+  width: 150px; 
+}

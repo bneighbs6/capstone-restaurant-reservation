@@ -31,20 +31,19 @@ function DashboardReservationsTable({ reservations, loadDashboard }) {
             <td>{reservation.people}</td>
             <td data-reservation-id-status={reservation.reservation_id}>
               {reservation.status}
+              <SeatReservationButton
+                reservation_id={reservation.reservation_id}
+                status={reservation.status}
+              />
             </td>
 
             {/* TODO: Space buttons evenly on xs-xxl screens */}
-            <td className="">
+            <td scope="col m-3">
               <EditReservationButton
                 reservation_id={reservation.reservation_id}
               />
 
               <CancelReservationButton reservation={reservation} />
-
-              <SeatReservationButton
-                reservation_id={reservation.reservation_id}
-                status={reservation.status}
-              />
             </td>
           </tr>
         </>
