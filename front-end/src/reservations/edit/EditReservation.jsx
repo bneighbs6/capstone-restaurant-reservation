@@ -43,8 +43,8 @@ function EditReservation() {
         <main>
           <h1>Edit Reservation {reservation_id} {reservation.first_name} {reservation.last_name}</h1>
           <ErrorAlert error={error} />
-          <form>
-            <ReservationForm onSubmit={submitHandler} />
+          <form onSubmit={submitHandler}>
+            <ReservationForm />
           </form>
         </main>
       );
