@@ -13,6 +13,34 @@ Need to add Live Demo and API docs
 
 ## Screenshots 
 
+### Dashboard (Home Page):
+
+### Create Reservation:
+
+### Create New Table:
+
+### Seat a Reseravtion:
+
+### Seated Reservation: 
+
+### Finishing a Table: 
+
+### Finsihed Table: 
+
+### Search for Reservation: 
+
+### Found Reservation: 
+
+### No Reservations Found: 
+
+### Edit Reservation: 
+
+### Editted Reservation: 
+
+### Cancel Reservation: 
+
+### Cancelled Reservation
+
 Add screenshots of functionality
 Add summary of each functionality
 
