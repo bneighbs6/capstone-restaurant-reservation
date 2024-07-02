@@ -4,23 +4,25 @@ import { createReservation } from "../../utils/api";
 import { formatAsDate } from "../../utils/date-time";
 import ErrorAlert from "../../layout/ErrorAlert";
 
-function ReservationForm() {
+function ReservationForm({ reservation, setReservation }) {
     const history = useHistory();
 
-    const initialFormState = {
-      first_name: "",
-      last_name: "",
-      mobile_number: "",
-      reservation_date: "",
-      reservation_time: "",
-      people: ""
-    }
+    // TODO: REMOVE IF CREATERESERVATION WORKS
+    // const initialFormState = {
+    //   first_name: "",
+    //   last_name: "",
+    //   mobile_number: "",
+    //   reservation_date: "",
+    //   reservation_time: "",
+    //   people: ""
+    // }
 
     // Setting our error to null 
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
 
+    // TODO: REMOVE IF CREATERESERVATION WORKS
     // Setting reservation in a state of empty fields
-    const [reservation, setReservation] = useState({...initialFormState}); 
+    // const [reservation, setReservation] = useState({...initialFormState}); 
 
     // Go back to previous page if cancel is clicked
     function cancelHandler() {
@@ -41,25 +43,23 @@ function ReservationForm() {
     };
 
     // Submits and saves form 
-    function submitHandler(e) {
-        e.preventDefault(); 
-        const abortController = new AbortController();
-        setError(null);
-        createReservation(reservation, abortController.signal)
-        .then(() => 
-          history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)
-        )
-        .catch(setError);
-        return () => abortController.abort(); 
-    }
+    // function submitHandler(e) {
+    //     e.preventDefault(); 
+    //     const abortController = new AbortController();
+    //     setError(null);
+    //     createReservation(reservation, abortController.signal)
+    //     .then(() => 
+    //       history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)
+    //     )
+    //     .catch(setError);
+    //     return () => abortController.abort(); 
+    // }
 
     // console.log(reservation);
 
     return (
       <>
-        <h1>Welcome to Periodic Tables</h1>
-        <ErrorAlert error={error} />
-        <form onSubmit={submitHandler}>
+        <h2>Welcome to Periodic Tables</h2>
           <h3>Please Enter Reservation Information</h3>
           <div className="form-group">
             <label htmlFor="first_name">First Name</label>
@@ -140,14 +140,13 @@ function ReservationForm() {
             />
           </div>
           <div className="buttons">
-            <button type="submit" onClick={submitHandler} className="btn btn-success">
+            <button type="submit" className="btn btn-success">
               Submit
             </button>
             <button className="btn btn-danger" onClick={cancelHandler}>
               Cancel
             </button>
           </div>
-        </form>
       </>
     );
 }
