@@ -5,24 +5,7 @@ import { formatAsDate } from "../../utils/date-time";
 import ErrorAlert from "../../layout/ErrorAlert";
 
 function ReservationForm({ reservation, setReservation }) {
-    const history = useHistory();
-
-    // TODO: REMOVE IF CREATERESERVATION WORKS
-    // const initialFormState = {
-    //   first_name: "",
-    //   last_name: "",
-    //   mobile_number: "",
-    //   reservation_date: "",
-    //   reservation_time: "",
-    //   people: ""
-    // }
-
-    // Setting our error to null 
-    // const [error, setError] = useState(null);
-
-    // TODO: REMOVE IF CREATERESERVATION WORKS
-    // Setting reservation in a state of empty fields
-    // const [reservation, setReservation] = useState({...initialFormState}); 
+    const history = useHistory(); 
 
     // Go back to previous page if cancel is clicked
     function cancelHandler() {
@@ -41,19 +24,6 @@ function ReservationForm({ reservation, setReservation }) {
         [target.name]: value,
       });
     };
-
-    // Submits and saves form 
-    // function submitHandler(e) {
-    //     e.preventDefault(); 
-    //     const abortController = new AbortController();
-    //     setError(null);
-    //     createReservation(reservation, abortController.signal)
-    //     .then(() => 
-    //       history.push(`/dashboard?date=${formatAsDate(reservation.reservation_date)}`)
-    //     )
-    //     .catch(setError);
-    //     return () => abortController.abort(); 
-    // }
 
     // console.log(reservation);
 
