@@ -50,6 +50,7 @@ The Dashboard can be found at "/dashboard" and has the following features:
 
 ### Seated Reservation: x
 ![seated-reservation](/screenshots/seated-reservation-page.png)
+- The reservation is now displayed as "seated" and the table is shown as "Occupied".
 
 ### Finishing a Table: 
 ![finish-table](/screenshots/finish-table-page.png)
