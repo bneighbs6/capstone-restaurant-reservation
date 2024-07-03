@@ -60,6 +60,7 @@ The Dashboard can be found at "/dashboard" and has the following features:
 
 ### Finished Table: 
 ![finished-table](/screenshots/table-finished-page.png)
+- All information for the reservation is no longer visible once it is finished. 
 
 ### Search for Reservation: 
 ![search-reservation](/screenshots/search-reservation-page.png)
