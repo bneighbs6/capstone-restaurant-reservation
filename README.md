@@ -9,7 +9,8 @@ Project Prompt
 
 ## Links
 
-Need to add Live Demo and API docs 
+[Live Demo](https://capstone-restaurant-reservation-ypom.onrender.com)
+[API Documentation]
 
 ## Screenshots 
 
@@ -100,8 +101,8 @@ The Dashboard can be found at "/dashboard" and has the following features:
 - Cancelled reservation no longer appears. 
 
 ## Technology Used
-### Built with: 
-#### React.js, JSX, HTML, CSS, and Bootstrap
+#### Built with: 
+- React.js, JSX, HTML, CSS, and Bootstrap
 
 ## Installation Instructions
 1. Fork and clone this repository.
