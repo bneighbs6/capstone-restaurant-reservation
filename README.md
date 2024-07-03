@@ -26,21 +26,27 @@ The Dashboard can be found at "/dashboard" and has the following features:
 ### Create Reservation:
 ![create-reservation](/screenshots/create-reservation-page.png)
 
-- When you click on New Reservation on the side bar, you are taken to the Create Reservation page at "/reservations/new". This form allows you to create a new reservation. Filling out each field is required. 
+- When the user clicks on "New Reservation" on the side bar, you are taken to the Create Reservation page at "/reservations/new". This form allows you to create a new reservation. Filling out each field is required. 
 - Clicking "Submit" saves the information then displays the "/dashboard" page with the date of the new reservation being dispalyed.
-- Clicking "Cancel" brings you back to the previous page you were visiting.
+- Clicking "Cancel" brings the user back to the previous page visited.
 - Error messages received from the API are displayed. 
 
 ### Create New Table:
 ![create-table](/screenshots/create-new-table-page.png)
 
-- When you click on New Table on the side bar, you are taken the New Table page at "/tables/new. This form allows you to create a new table. Filling out each field is required. 
+- When the user clicks on "New Table" on the side bar, you are taken the New Table page at "/tables/new. This form allows you to create a new table. Filling out each field is required. 
 - Clicking "Submit" saves the information and displays the "/dashboard" page. 
-- Clicking "Cancel" brings you back to the previous page you were visiting.
+- Clicking "Cancel" brings the user back to the previous page visited.
 - Error messages received from the API are displayed. 
 
-### Seat a Reseravtion: x
-![seat-reservation](/screenshots//seat-reservation-page.png)
+### Seat a Reseravtion: 
+![seat-reservation](/screenshots//seat-reservation-click.png)
+![seat-res-click](/screenshots/seat-reservation-page.png)
+- When the user clicks on the "Seat Reservation" button for a specific reservation, they will be sent to the Seat Reservation page at "/reservations/:reservation_id/seat". 
+- This page allows the user to choose which table to seat the reservation. The drop-down menu items are listed so that the first data info is the Table Name, and the second data info is the Table Capacity.
+- Clicking "Submit" assigns the table to the reservation then brings the user back to the "/dashboard" page.
+- Clicking "Cancel" brings the user back to the previous page visited.
+- Error messages received from the API are displayed. 
 
 ### Seated Reservation: x
 ![seated-reservation](/screenshots/seated-reservation-page.png)
