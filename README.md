@@ -15,7 +15,8 @@ Need to add Live Demo and API docs
 
 ### Dashboard (Home Page):
 ![dashboard](/screenshots/dashboard-page.png)
-The Dashboard can be found at the home page.
+The Dashboard can be found at "/dashboard" and has the following features: 
+
 - Lists the reservations for the specified date. The date is defaulted today and the reservations are sorted by their entered time. 
 - Each reservation displays its necessary information, including its status. A "Seat Reservation" button is displayed only for reservations with the default status of "booked".
 - Each reservation has an "Edit Reservation" and "Cancel Reservation" button. 
@@ -24,6 +25,11 @@ The Dashboard can be found at the home page.
 
 ### Create Reservation:
 ![create-reservation](/screenshots/create-reservation-page.png)
+
+- When you click on New Reservation on the side bar, you are taken to the Create Reservation page at "/reservations/new". This form you to create a new reservation, filling out required field. 
+- Clicking "Submit" saves the information then displays the "/dashboard" page with the date of the new reservation being dispalyed.
+- Clicking "Cancel" brings you back to the previous page you were visiting.
+- Error messages received from the API are displayed. 
 
 ### Create New Table:
 ![create-table](/screenshots/create-new-table-page.png)
