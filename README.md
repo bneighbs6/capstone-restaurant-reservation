@@ -15,6 +15,12 @@ Need to add Live Demo and API docs
 
 ### Dashboard (Home Page):
 ![dashboard](/screenshots/dashboard-page.png)
+The Dashboard can be found at the home page.
+- Lists the reservations for the specified date. The date is defaulted today and the reservations are sorted by their entered time. 
+- Each reservation displays its necessary information, including its status. A "Seat Reservation" button is displayed only for reservations with the default status of "booked".
+- Each reservation has an "Edit Reservation" and "Cancel Reservation" button. 
+- Lists all tables sorted by their name. Each table will show either "Free" or "Occupied" depending on the availablity of the table. If a table is "Occupied" the "Finish" button is enabled, otherwise the "Finish" button is disabled. 
+- Lists all errors received from the API.
 
 ### Create Reservation:
 ![create-reservation](/screenshots/create-reservation-page.png)
