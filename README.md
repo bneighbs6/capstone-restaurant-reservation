@@ -64,12 +64,17 @@ The Dashboard can be found at "/dashboard" and has the following features:
 
 ### Search for Reservation: 
 ![search-reservation](/screenshots/search-reservation-page.png)
+- When the user clicks "Search" on the side bar, they are brought to the Search page at "/search". 
+- This page displays a fillable input field to begin typing a phone number. The user can type either a partial or full phone number. This page also has a "Find" button. If clicked, and a reservation or reservations match the given phone number, they will be displayed on the "/search" page. The status of the reservation does not matter.  
+
 
 ### Found Reservation: 
 ![found-reservation](/screenshots/found-res-page.png)
+- Found reservations displayed. 
 
 ### No Reservations Found: 
 ![no-found-reservation](/screenshots/res-not-found-page.png)
+- If no reservations match the given phone number, the user sees the following response, "No reservations found."
 
 ### Edit Reservation: 
 ![edit-reservation-click](/screenshots/edit-reservation-click-page.png)
