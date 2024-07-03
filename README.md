@@ -16,31 +16,46 @@ Need to add Live Demo and API docs
 ### Dashboard (Home Page):
 ![dashboard](/screenshots/dashboard-page.png)
 
-### Create Reservation: x
+### Create Reservation:
+![create-reservation](/screenshots/create-reservation-page.png)
 
-### Create New Table: x
+### Create New Table:
+![create-table](/screenshots/create-new-table-page.png)
 
 ### Seat a Reseravtion: x
+![seat-reservation](/screenshots//seat-reservation-page.png)
 
 ### Seated Reservation: x
+![seated-reservation](/screenshots/seated-reservation-page.png)
 
-### Finishing a Table: x
+### Finishing a Table: 
+![finish-table](/screenshots/finish-table-page.png)
 
-### Finished Table: x
+### Finished Table: 
+![finished-table](/screenshots/table-finished-page.png)
 
-### Search for Reservation: x
+### Search for Reservation: 
+![search-reservation](/screenshots/search-reservation-page.png)
 
-### Found Reservation: x
+### Found Reservation: 
+![found-reservation](/screenshots/found-res-page.png)
 
-### No Reservations Found: x
+### No Reservations Found: 
+![no-found-reservation](/screenshots/res-not-found-page.png)
 
-### Edit Reservation: x
+### Edit Reservation: 
+![edit-reservation-click](/screenshots/edit-reservation-click-page.png)
+![edit-reservation-page](/screenshots/edit-res-page.png)
 
-### Editted Reservation: x
+### Editted Reservation: 
+![editted-reservation](/screenshots/editted-res-page.png)
 
-### Cancel Reservation: x
+### Cancel Reservation: 
+![cancel-reservation-click](/screenshots/cancel-res-click-page.png)
+![cancel-reservation-page](/screenshots/cancel-message-page.png)
 
-### Cancelled Reservation: x
+### Cancelled Reservation: 
+![cancelled-reservation](/screenshots/res-cancelled-page.png)
 
 Add screenshots of functionality
 Add summary of each functionality
