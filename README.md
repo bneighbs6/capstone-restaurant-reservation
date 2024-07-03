@@ -79,9 +79,14 @@ The Dashboard can be found at "/dashboard" and has the following features:
 ### Edit Reservation: 
 ![edit-reservation-click](/screenshots/edit-reservation-click-page.png)
 ![edit-reservation-page](/screenshots/edit-res-page.png)
+- When the user clicks on the "Edit Reservation" button for a specific reservation, they are taken to the "/reservations/:reservation_id/edit" page. 
+- This page displays the same form as the Create Reservation page does, but this time with all fields filled in with the given reservation. 
+- Clicking "Submit" will save the reservation with the updated information, and bring the user back to the "/dashboard" page. 
+- Clicking "Cancel" makes no changes to the reservation and brings the user back to the previous page. 
 
 ### Editted Reservation: 
 ![editted-reservation](/screenshots/editted-res-page.png)
+- Displays reservation with the updated information.
 
 ### Cancel Reservation: 
 ![cancel-reservation-click](/screenshots/cancel-res-click-page.png)
