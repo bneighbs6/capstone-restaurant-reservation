@@ -26,13 +26,18 @@ The Dashboard can be found at "/dashboard" and has the following features:
 ### Create Reservation:
 ![create-reservation](/screenshots/create-reservation-page.png)
 
-- When you click on New Reservation on the side bar, you are taken to the Create Reservation page at "/reservations/new". This form you to create a new reservation, filling out required field. 
+- When you click on New Reservation on the side bar, you are taken to the Create Reservation page at "/reservations/new". This form allows you to create a new reservation. Filling out each field is required. 
 - Clicking "Submit" saves the information then displays the "/dashboard" page with the date of the new reservation being dispalyed.
 - Clicking "Cancel" brings you back to the previous page you were visiting.
 - Error messages received from the API are displayed. 
 
 ### Create New Table:
 ![create-table](/screenshots/create-new-table-page.png)
+
+- When you click on New Table on the side bar, you are taken the New Table page at "/tables/new. This form allows you to create a new table. Filling out each field is required. 
+- Clicking "Submit" saves the information and displays the "/dashboard" page. 
+- Clicking "Cancel" brings you back to the previous page you were visiting.
+- Error messages received from the API are displayed. 
 
 ### Seat a Reseravtion: x
 ![seat-reservation](/screenshots//seat-reservation-page.png)
