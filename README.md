@@ -54,6 +54,9 @@ The Dashboard can be found at "/dashboard" and has the following features:
 
 ### Finishing a Table: 
 ![finish-table](/screenshots/finish-table-page.png)
+- When the user clicks "Finish" for a given table, the above confirmation message appears. 
+- If the user clicks "OK", the table will remove the "Occupied" assignment and become "Free" again. This will also make the reservations status "finished" and remove it from the Reservations list on the "/dashboard" page. 
+- If the user clicks "Cancel" nothing happens. 
 
 ### Finished Table: 
 ![finished-table](/screenshots/table-finished-page.png)
