@@ -91,12 +91,13 @@ The Dashboard can be found at "/dashboard" and has the following features:
 ### Cancel Reservation: 
 ![cancel-reservation-click](/screenshots/cancel-res-click-page.png)
 ![cancel-reservation-page](/screenshots/cancel-message-page.png)
+- When the user clicks "Cancel Reservation" for a specific reservation, the above confirmation message appears.
+- If the user clicks "OK", the status of the reservation is set to "cancelled", and the results of the page are refreshed.  
+- If the user clicks "Cancel", nothing happens. 
 
 ### Cancelled Reservation: 
 ![cancelled-reservation](/screenshots/res-cancelled-page.png)
-
-Add screenshots of functionality
-Add summary of each functionality
+- Cancelled reservation no longer appears. 
 
 ## Technology Used
 ### Built with: 
