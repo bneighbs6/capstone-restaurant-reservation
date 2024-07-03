@@ -10,7 +10,7 @@ Project Prompt
 ## Links
 
 [Live Demo](https://capstone-restaurant-reservation-ypom.onrender.com)
-[API Documentation]
+[API Documentation](https://github.com/bneighbs6/capstone-restaurant-reservation/tree/main/back-end)
 
 ## Screenshots 
 
