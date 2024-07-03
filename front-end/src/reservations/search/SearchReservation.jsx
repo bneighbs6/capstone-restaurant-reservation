@@ -3,6 +3,8 @@ import ErrorAlert from "../../layout/ErrorAlert";
 import { listReservations } from "../../utils/api";
 import DashboardReservationsTable from "../../dashboard/DashboardReservationsTable";
 
+// TODO: Update the design for better visual spacing
+
 function SearchReservation() {
   // useState variables
   const [phoneNumber, setPhoneNumber] = useState({
@@ -39,9 +41,9 @@ function SearchReservation() {
   return (
     <main>
       <ErrorAlert error={error} />
-      <h4>Search Reservation by Phone Number</h4>
-      <form onSubmit={submitHandler}>
-        <div className="row">
+      <h4 className="m-3">Search Reservation by Phone Number</h4>
+      <form onSubmit={submitHandler} className="">
+        <div className="row m-3">
             <input
               name="mobile_number"
               type="text"
@@ -51,7 +53,7 @@ function SearchReservation() {
               onChange={changeHandler}
               value={phoneNumber.mobile_number}
             />
-            <button className="btn btn-primary" type="submit">Find</button>
+            <button className="btn btn-primary my-3" type="submit">Find</button>
           </div>
       </form>
       {foundReservation ? (

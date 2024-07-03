@@ -13,7 +13,8 @@ Need to add Live Demo and API docs
 
 ## Screenshots 
 
-### Dashboard (Home Page): x
+### Dashboard (Home Page):
+![dashboard](/screenshots/dashboard-page.png)
 
 ### Create Reservation: x
 
@@ -27,19 +28,19 @@ Need to add Live Demo and API docs
 
 ### Finished Table: x
 
-### Search for Reservation: 
+### Search for Reservation: x
 
-### Found Reservation: 
+### Found Reservation: x
 
-### No Reservations Found: 
+### No Reservations Found: x
 
-### Edit Reservation: 
+### Edit Reservation: x
 
-### Editted Reservation: 
+### Editted Reservation: x
 
-### Cancel Reservation: 
+### Cancel Reservation: x
 
-### Cancelled Reservation
+### Cancelled Reservation: x
 
 Add screenshots of functionality
 Add summary of each functionality
