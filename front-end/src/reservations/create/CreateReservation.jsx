@@ -7,7 +7,7 @@ import { formatAsDate } from "../../utils/date-time";
 
 
 function CreateReservation() {
-    const history = useHistory();
+    const history = useHistory(); 
 
     const initialFormState = {
       first_name: "",
