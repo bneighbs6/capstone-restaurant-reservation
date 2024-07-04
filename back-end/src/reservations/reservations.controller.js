@@ -271,6 +271,7 @@ async function updateReservation(req, res, next) {
  */
 
 async function list(req, res) {
+  console.log("inside list function");
   const { date, mobile_number } = req.query;
   if (date) {
     const data = await service.listReservationsByDate(date);
