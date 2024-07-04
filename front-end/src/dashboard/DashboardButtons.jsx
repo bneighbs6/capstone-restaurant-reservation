@@ -3,8 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { previous, today, next } from "../utils/date-time";
 
 function DashboardButtons({ date }) {
-    const history = useHistory();
-    const location = useLocation();
+  const history = useHistory();
+  const location = useLocation();
   const [reservationsDate, setReservationsDate] = useState(date);
 
   function previousButtonClickHandler() {
@@ -29,30 +29,30 @@ function DashboardButtons({ date }) {
   }
 
   return (
-    <div className="btn-group">
-        <button 
+    <div className="btn-group mt-1 mb-4">
+      <button
         type="button"
-        className="btn btn-secondary btn-sm"
+        className="btn btn-secondary btn-sm mx-3"
         onClick={previousButtonClickHandler}
-        >
-            Previous Date 
-        </button>
+      >
+        Previous Date
+      </button>
 
-        <button 
+      <button
         type="button"
-        className="btn btn-secondary btn-sm"
+        className="btn btn-secondary btn-sm mx-3"
         onClick={todayButtonClickHandler}
-        >
-            Today 
-        </button>
+      >
+        Today
+      </button>
 
-        <button 
+      <button
         type="button"
-        className="btn btn-secondary btn-sm"
+        className="btn btn-secondary btn-sm mx-3"
         onClick={nextButtonClickHandler}
-        >
-            Next Day 
-        </button>
+      >
+        Next Day
+      </button>
     </div>
   );
 }

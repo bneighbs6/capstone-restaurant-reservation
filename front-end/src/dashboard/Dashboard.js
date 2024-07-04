@@ -36,7 +36,7 @@ function loadDashboard() {
       <h1>Dashboard</h1>
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for Date: {date}</h4>
-        <DashboardButtons date={today_date} />
+        <DashboardButtons date={date} />
       </div>
       <ErrorAlert error={reservationsError} />
       <DashboardReservationsTable reservations={reservations} loadDashboard={loadDashboard} />
