@@ -82,7 +82,6 @@ function reservationDateNotInPast(req, res, next) {
     const reservationDateAndTime = new Date(
       `${reservation_date} ${reservation_time}`
     );
-    console.log(reservationDateAndTime);
 
     if (reservationDateAndTime < currentDateAndTime) {
       next({
@@ -150,11 +149,6 @@ function hasReservationTimeInAcceptableTimes(req, res, next) {
 function hasPeople(req, res, next) {
   const people = req.body.data.people;
   const regex = new RegExp(/[^1-6]/);
-
-  // console.log("first-> ", people)
-  // console.log("second-> ", !regex.test(people))
-  // console.log("third->", typeof people === "number") 
-  // console.log(typeof people);
 
   // if people is truthy, people is a number b/w 1-6, and typeof = number
   if (people && !regex.test(people) && typeof people === "number") {
@@ -271,7 +265,6 @@ async function updateReservation(req, res, next) {
  */
 
 async function list(req, res) {
-  console.log("inside list function");
   const { date, mobile_number } = req.query;
   if (date) {
     const data = await service.listReservationsByDate(date);

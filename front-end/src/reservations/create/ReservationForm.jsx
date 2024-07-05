@@ -22,8 +22,6 @@ function ReservationForm({ reservation, setReservation }) {
       });
     };
 
-    // console.log(reservation);
-
     return (
       <>
         <h2>Welcome to Periodic Tables</h2>
