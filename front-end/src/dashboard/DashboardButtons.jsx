@@ -5,12 +5,11 @@ import { previous, today, next } from "../utils/date-time";
 function DashboardButtons({ date }) {
   const history = useHistory();
   const location = useLocation();
-  const [reservationsDate, setReservationsDate] = useState(date);
 
   function previousButtonClickHandler() {
     history.push({
       pathname: location.pathname,
-      search: `?date=${previous(reservationsDate)}`,
+      search: `?date=${previous(date)}`,
     });
   }
 
@@ -24,7 +23,7 @@ function DashboardButtons({ date }) {
   function nextButtonClickHandler() {
     history.push({
       pathname: location.pathname,
-      search: `?date=${next(reservationsDate)}`,
+      search: `?date=${next(date)}`,
     });
   }
 
