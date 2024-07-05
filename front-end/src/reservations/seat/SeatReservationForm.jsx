@@ -18,6 +18,7 @@ function SeatReservationForm() {
     // Adding abortController to avoid the below error:
     // React Hook useEffect has a missing dependency: 'abortController'
     // Made the loadDashboard render every time its called made testing take longer
+    // eslint-disable-next-line
     useEffect(loadDashboard, []); 
 
     function loadDashboard() {
